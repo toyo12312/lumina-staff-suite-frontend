@@ -15,8 +15,6 @@ _(Note: The first data load might take up to 30 seconds as the backend is hosted
 
 ### 📸 Screenshots
 
-_(Тут ви додасте 2-3 гарних скріншоти вашого додатку)_
-
 ![Screenshot of the Dashboard](https://via.placeholder.com/800x450.png?text=Dashboard+Screenshot)
 _Dashboard Page_
 
