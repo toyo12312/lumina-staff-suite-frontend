@@ -1,0 +1,57 @@
+{
+  "sidebar": {
+    "dashboard": "Panou de control",
+    "employees": "Angajați",
+    "reports": "Rapoarte",
+    "settings": "Setări"
+  },
+  "dashboard": {
+    "title": "Panou de control",
+    "subtitle": "Prezentare generală a indicatorilor cheie ai echipei dumneavoastră.",
+    "total_employees": "Total Angajați",
+    "active": "Activi",
+    "on_leave": "În concediu",
+    "terminated": "Disponibilizați",
+    "status_distribution": "Distribuție după statut"
+  },
+  "employees": {
+    "title": "Lista angajaților",
+    "subtitle": "Gestionați datele echipei dumneavoastră.",
+    "add_employee": "Adăugați un angajat",
+    "search_placeholder": "Căutați după nume, poziție sau email...",
+    "table_header_name": "Nume și Prenume",
+    "table_header_position": "Poziție",
+    "table_header_status": "Statut",
+    "table_header_email": "Email",
+    "table_header_actions": "Acțiuni",
+    "status": {
+      "active": "Activ",
+      "on_leave": "În concediu",
+      "terminated": "Disponibilizat"
+    },
+    "modal_edit_title": "Editați datele angajatului",
+    "modal_add_title": "Adăugați un angajat nou",
+    "form_label_firstname": "Prenume",
+    "form_label_lastname": "Nume de familie",
+    "form_label_position": "Poziție",
+    "form_label_email": "Email",
+    "form_label_status": "Statut",
+    "button_update": "Actualizați datele",
+    "button_save": "Salvați",
+    "button_cancel": "Anulați"
+  },
+  "reports": {
+    "title": "Rapoarte",
+    "subtitle": "Vizualizați și exportați datele angajaților.",
+    "export_csv": "Export în CSV",
+    "table_header_hire_date": "Data angajării"
+  },
+  "settings": {
+    "title": "Setări",
+    "general": "Generale",
+    "theme_interface": "Tema interfeței",
+    "theme_description": "Alegeți o temă deschisă sau închisă pentru o muncă confortabilă.",
+    "language_interface": "Limba interfeței",
+    "language_description": "Alegeți limba în care va fi afișată aplicația."
+  }
+}

@@ -1,0 +1,57 @@
+{
+  "sidebar": {
+    "dashboard": "Dashboard",
+    "employees": "Mitarbeiter",
+    "reports": "Berichte",
+    "settings": "Einstellungen"
+  },
+  "dashboard": {
+    "title": "Dashboard",
+    "subtitle": "Überblick über die wichtigsten Kennzahlen Ihres Teams.",
+    "total_employees": "Mitarbeiter Gesamt",
+    "active": "Aktiv",
+    "on_leave": "Beurlaubt",
+    "terminated": "Gekündigt",
+    "status_distribution": "Statusverteilung"
+  },
+  "employees": {
+    "title": "Mitarbeiterliste",
+    "subtitle": "Verwalten Sie die Daten Ihres Teams.",
+    "add_employee": "Mitarbeiter hinzufügen",
+    "search_placeholder": "Suche nach Name, Position oder E-Mail...",
+    "table_header_name": "Name & Nachname",
+    "table_header_position": "Position",
+    "table_header_status": "Status",
+    "table_header_email": "Email",
+    "table_header_actions": "Aktionen",
+    "status": {
+      "active": "Aktiv",
+      "on_leave": "Beurlaubt",
+      "terminated": "Gekündigt"
+    },
+    "modal_edit_title": "Mitarbeiterdaten bearbeiten",
+    "modal_add_title": "Neuen Mitarbeiter hinzufügen",
+    "form_label_firstname": "Vorname",
+    "form_label_lastname": "Nachname",
+    "form_label_position": "Position",
+    "form_label_email": "Email",
+    "form_label_status": "Status",
+    "button_update": "Daten aktualisieren",
+    "button_save": "Speichern",
+    "button_cancel": "Abbrechen"
+  },
+  "reports": {
+    "title": "Berichte",
+    "subtitle": "Mitarbeiterdaten anzeigen und exportieren.",
+    "export_csv": "Als CSV exportieren",
+    "table_header_hire_date": "Einstellungsdatum"
+  },
+  "settings": {
+    "title": "Einstellungen",
+    "general": "Allgemein",
+    "theme_interface": "Interface-Thema",
+    "theme_description": "Wählen Sie ein helles oder dunkles Thema für komfortables Arbeiten.",
+    "language_interface": "Interface-Sprache",
+    "language_description": "Wählen Sie die Sprache, in der die Anwendung angezeigt werden soll."
+  }
+}

@@ -1,0 +1,57 @@
+{
+  "sidebar": {
+    "dashboard": "Pulpit",
+    "employees": "Pracownicy",
+    "reports": "Raporty",
+    "settings": "Ustawienia"
+  },
+  "dashboard": {
+    "title": "Pulpit",
+    "subtitle": "Przegląd kluczowych wskaźników Twojego zespołu.",
+    "total_employees": "Wszyscy pracownicy",
+    "active": "Aktywni",
+    "on_leave": "Na urlopie",
+    "terminated": "Zwolnieni",
+    "status_distribution": "Rozkład według statusu"
+  },
+  "employees": {
+    "title": "Lista pracowników",
+    "subtitle": "Zarządzaj danymi swojego zespołu.",
+    "add_employee": "Dodaj pracownika",
+    "search_placeholder": "Szukaj według imienia, stanowiska lub e-maila...",
+    "table_header_name": "Imię i nazwisko",
+    "table_header_position": "Stanowisko",
+    "table_header_status": "Status",
+    "table_header_email": "Email",
+    "table_header_actions": "Akcje",
+    "status": {
+      "active": "Aktywny",
+      "on_leave": "Na urlopie",
+      "terminated": "Zwolniony"
+    },
+    "modal_edit_title": "Edytuj dane pracownika",
+    "modal_add_title": "Dodaj nowego pracownika",
+    "form_label_firstname": "Imię",
+    "form_label_lastname": "Nazwisko",
+    "form_label_position": "Stanowisko",
+    "form_label_email": "Email",
+    "form_label_status": "Status",
+    "button_update": "Zaktualizuj dane",
+    "button_save": "Zapisz",
+    "button_cancel": "Anuluj"
+  },
+  "reports": {
+    "title": "Raporty",
+    "subtitle": "Przeglądaj i eksportuj dane pracowników.",
+    "export_csv": "Eksportuj do CSV",
+    "table_header_hire_date": "Data zatrudnienia"
+  },
+  "settings": {
+    "title": "Ustawienia",
+    "general": "Ogólne",
+    "theme_interface": "Motyw interfejsu",
+    "theme_description": "Wybierz jasny lub ciemny motyw dla wygodnej pracy.",
+    "language_interface": "Język interfejsu",
+    "language_description": "Wybierz język, w którym będzie wyświetlana aplikacja."
+  }
+}

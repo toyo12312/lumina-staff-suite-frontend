@@ -1,0 +1,57 @@
+{
+  "sidebar": {
+    "dashboard": "Дашборд",
+    "employees": "Співробітники",
+    "reports": "Звіти",
+    "settings": "Налаштування"
+  },
+  "dashboard": {
+    "title": "Інформаційна панель",
+    "subtitle": "Огляд ключових показників вашої команди.",
+    "total_employees": "Всього співробітників",
+    "active": "Активні",
+    "on_leave": "У відпустці",
+    "terminated": "Звільнені",
+    "status_distribution": "Розподіл за статусом"
+  },
+  "employees": {
+    "title": "Список співробітників",
+    "subtitle": "Керуйте даними вашої команди.",
+    "add_employee": "Додати співробітника",
+    "search_placeholder": "Пошук за іменем, позицією або email...",
+    "table_header_name": "Ім'я та Прізвище",
+    "table_header_position": "Посада",
+    "table_header_status": "Статус",
+    "table_header_email": "Email",
+    "table_header_actions": "Дії",
+    "status": {
+      "active": "Активний",
+      "on_leave": "У відпустці",
+      "terminated": "Звільнений"
+    },
+    "modal_edit_title": "Редагувати дані співробітника",
+    "modal_add_title": "Додати нового співробітника",
+    "form_label_firstname": "Ім'я",
+    "form_label_lastname": "Прізвище",
+    "form_label_position": "Посада",
+    "form_label_email": "Email",
+    "form_label_status": "Статус",
+    "button_update": "Оновити дані",
+    "button_save": "Зберегти",
+    "button_cancel": "Скасувати"
+  },
+  "reports": {
+    "title": "Звіти",
+    "subtitle": "Переглядайте та експортуйте дані про співробітників.",
+    "export_csv": "Експорт у CSV",
+    "table_header_hire_date": "Дата найму"
+  },
+  "settings": {
+    "title": "Налаштування",
+    "general": "Загальні",
+    "theme_interface": "Тема інтерфейсу",
+    "theme_description": "Оберіть світлу або темну тему для комфортної роботи.",
+    "language_interface": "Мова інтерфейсу",
+    "language_description": "Оберіть мову, якою буде відображатись додаток."
+  }
+}

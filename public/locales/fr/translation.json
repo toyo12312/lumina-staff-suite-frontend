@@ -1,0 +1,57 @@
+{
+  "sidebar": {
+    "dashboard": "Tableau de bord",
+    "employees": "Employés",
+    "reports": "Rapports",
+    "settings": "Paramètres"
+  },
+  "dashboard": {
+    "title": "Tableau de bord",
+    "subtitle": "Aperçu des indicateurs clés de votre équipe.",
+    "total_employees": "Total des employés",
+    "active": "Actifs",
+    "on_leave": "En congé",
+    "terminated": "Licenciés",
+    "status_distribution": "Répartition par statut"
+  },
+  "employees": {
+    "title": "Liste des employés",
+    "subtitle": "Gérez les données de votre équipe.",
+    "add_employee": "Ajouter un employé",
+    "search_placeholder": "Rechercher par nom, poste ou e-mail...",
+    "table_header_name": "Nom et Prénom",
+    "table_header_position": "Poste",
+    "table_header_status": "Statut",
+    "table_header_email": "Email",
+    "table_header_actions": "Actions",
+    "status": {
+      "active": "Actif",
+      "on_leave": "En congé",
+      "terminated": "Licencié"
+    },
+    "modal_edit_title": "Modifier les données de l'employé",
+    "modal_add_title": "Ajouter un nouvel employé",
+    "form_label_firstname": "Prénom",
+    "form_label_lastname": "Nom de famille",
+    "form_label_position": "Poste",
+    "form_label_email": "Email",
+    "form_label_status": "Statut",
+    "button_update": "Mettre à jour",
+    "button_save": "Enregistrer",
+    "button_cancel": "Annuler"
+  },
+  "reports": {
+    "title": "Rapports",
+    "subtitle": "Affichez et exportez les données des employés.",
+    "export_csv": "Exporter en CSV",
+    "table_header_hire_date": "Date d'embauche"
+  },
+  "settings": {
+    "title": "Paramètres",
+    "general": "Général",
+    "theme_interface": "Thème de l'interface",
+    "theme_description": "Choisissez un thème clair ou sombre pour un travail confortable.",
+    "language_interface": "Langue de l'interface",
+    "language_description": "Choisissez la langue dans laquelle l'application sera affichée."
+  }
+}

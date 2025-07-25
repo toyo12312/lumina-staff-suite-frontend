@@ -1,0 +1,57 @@
+{
+  "sidebar": {
+    "dashboard": "Dashboard",
+    "employees": "Employees",
+    "reports": "Reports",
+    "settings": "Settings"
+  },
+  "dashboard": {
+    "title": "Dashboard",
+    "subtitle": "Overview of your team's key metrics.",
+    "total_employees": "Total Employees",
+    "active": "Active",
+    "on_leave": "On Leave",
+    "terminated": "Terminated",
+    "status_distribution": "Status Distribution"
+  },
+  "employees": {
+    "title": "Employees List",
+    "subtitle": "Manage your team's data.",
+    "add_employee": "Add Employee",
+    "search_placeholder": "Search by name, position, or email...",
+    "table_header_name": "Name & Last Name",
+    "table_header_position": "Position",
+    "table_header_status": "Status",
+    "table_header_email": "Email",
+    "table_header_actions": "Actions",
+    "status": {
+      "active": "Active",
+      "on_leave": "On Leave",
+      "terminated": "Terminated"
+    },
+    "modal_edit_title": "Edit Employee Data",
+    "modal_add_title": "Add New Employee",
+    "form_label_firstname": "First Name",
+    "form_label_lastname": "Last Name",
+    "form_label_position": "Position",
+    "form_label_email": "Email",
+    "form_label_status": "Status",
+    "button_update": "Update Data",
+    "button_save": "Save",
+    "button_cancel": "Cancel"
+  },
+  "reports": {
+    "title": "Reports",
+    "subtitle": "View and export employee data.",
+    "export_csv": "Export to CSV",
+    "table_header_hire_date": "Hire Date"
+  },
+  "settings": {
+    "title": "Settings",
+    "general": "General",
+    "theme_interface": "Interface Theme",
+    "theme_description": "Choose a light or dark theme for comfortable work.",
+    "language_interface": "Interface Language",
+    "language_description": "Choose the language in which the application will be displayed."
+  }
+}
