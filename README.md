@@ -1,7 +1,6 @@
 Lumina Staff Suite - Frontend
 🚀 Live Demo
-Перегляньте робочу версію проєкту тут:
-https://dancing-cactus-9d087f.netlify.app/dashboard
+https://lumina-staff-suite.netlify.app
 
 ✨ Features
 ✅ Full CRUD Functionality: A complete module for managing employees (Create, Read, Update, Delete) with modals, search, and real-time updates.
