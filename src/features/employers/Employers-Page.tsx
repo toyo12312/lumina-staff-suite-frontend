@@ -25,7 +25,7 @@ const EmployeesPage = () => {
   return (
     <>
       <Helmet>
-        <title>{t('seo.employees_title')}</title>
+        <title>{t('Emploeyrs')}</title>
         <meta name="description" content={t('seo.employees_description')} />
       </Helmet>
       <div className="p-4 md:p-6 lg:p-8">

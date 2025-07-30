@@ -1,6 +1,5 @@
 import { Helmet } from 'react-helmet-async';
 import { useTranslation } from 'react-i18next';
-
 import { useTheme } from './useTheme';
 import { ThemeToggle } from './components/ThemeToggle';
 import { LanguageSwitcher } from './components/LanguageSwitcher';
@@ -12,7 +11,7 @@ const SettingsPage = () => {
   return (
     <>
       <Helmet>
-        <title>{t('seo.settings_title')}</title>
+        <title>{t('Settings')}</title>
         <meta name="description" content={t('seo.settings_description')} />
       </Helmet>
       <div className="p-4 md:p-6 lg:p-8">
@@ -24,8 +23,6 @@ const SettingsPage = () => {
             <h2 className="text-lg font-semibold mb-4">
               {t('settings.general')}
             </h2>
-
-            {/* --- Блок для зміни теми --- */}
             <div className="flex items-center justify-between py-4 border-b dark:border-gray-700">
               <div>
                 <p className="font-medium">{t('settings.theme_interface')}</p>
@@ -33,11 +30,8 @@ const SettingsPage = () => {
                   {t('settings.theme_description')}
                 </p>
               </div>
-              {/* Використовуємо наш новий, чистий компонент */}
               <ThemeToggle checked={theme === 'dark'} onChange={toggleTheme} />
             </div>
-
-            {/* --- Блок для зміни мови --- */}
             <div className="flex flex-col md:flex-row items-start md:items-center justify-between py-4">
               <div className="mb-4 md:mb-0">
                 <p className="font-medium">
@@ -48,7 +42,6 @@ const SettingsPage = () => {
                 </p>
               </div>
               <div className="w-full md:w-48">
-                {/* Використовуємо наш новий, чистий компонент */}
                 <LanguageSwitcher />
               </div>
             </div>

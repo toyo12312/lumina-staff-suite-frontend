@@ -2,7 +2,6 @@ import { Helmet } from 'react-helmet-async';
 import { Download } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import type { Employee } from '../../types';
-
 import { useReports } from './useReports';
 
 type CsvRow = {
@@ -22,7 +21,6 @@ const exportToCsv = (filename: string, rows: CsvRow[]) => {
       .map((row) => {
         return keys
           .map((k) => {
-            // Тепер TypeScript знає, що `row[k]` - це безпечна операція
             let cell = row[k] === null || row[k] === undefined ? '' : row[k];
             cell =
               cell instanceof Date
@@ -71,7 +69,7 @@ const ReportsPage = () => {
   return (
     <>
       <Helmet>
-        <title>{t('seo.reports_title')}</title>
+        <title>{t('Reports')}</title>
         <meta name="description" content={t('seo.reports_description')} />
       </Helmet>
       <div className="p-4 md:p-6 lg:p-8">
