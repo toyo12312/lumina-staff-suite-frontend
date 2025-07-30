@@ -48,7 +48,9 @@
     "form_label_status": "Status",
     "button_update": "Zaktualizuj dane",
     "button_save": "Zapisz",
-    "button_cancel": "Anuluj"
+    "button_cancel": "Anuluj",
+    "button_edit": "Edytuj",
+    "button_delete": "Usuń"
   },
   "reports": {
     "title": "Raporty",

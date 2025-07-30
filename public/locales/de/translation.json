@@ -48,7 +48,9 @@
     "form_label_status": "Status",
     "button_update": "Daten aktualisieren",
     "button_save": "Speichern",
-    "button_cancel": "Abbrechen"
+    "button_cancel": "Abbrechen",
+    "button_edit": "Bearbeiten",
+    "button_delete": "Löschen"
   },
   "reports": {
     "title": "Berichte",

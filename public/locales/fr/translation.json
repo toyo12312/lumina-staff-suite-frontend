@@ -48,7 +48,9 @@
     "form_label_status": "Statut",
     "button_update": "Mettre à jour",
     "button_save": "Enregistrer",
-    "button_cancel": "Annuler"
+    "button_cancel": "Annuler",
+    "button_edit": "Modifier",
+    "button_delete": "Supprimer"
   },
   "reports": {
     "title": "Rapports",

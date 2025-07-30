@@ -48,7 +48,9 @@
     "form_label_status": "Статус",
     "button_update": "Оновити дані",
     "button_save": "Зберегти",
-    "button_cancel": "Скасувати"
+    "button_cancel": "Скасувати",
+    "button_edit": "Редагувати",
+    "button_delete": "Видалити"
   },
   "reports": {
     "title": "Звіти",

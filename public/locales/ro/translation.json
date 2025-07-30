@@ -48,7 +48,9 @@
     "form_label_status": "Statut",
     "button_update": "Actualizați datele",
     "button_save": "Salvați",
-    "button_cancel": "Anulați"
+    "button_cancel": "Anulați",
+    "button_edit": "Editare",
+    "button_delete": "Ștergere"
   },
   "reports": {
     "title": "Rapoarte",
