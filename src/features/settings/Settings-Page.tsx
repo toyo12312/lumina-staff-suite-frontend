@@ -1,5 +1,6 @@
 import { Helmet } from 'react-helmet-async';
 import { useTranslation } from 'react-i18next';
+
 import { useTheme } from './useTheme';
 import { ThemeToggle } from './components/ThemeToggle';
 import { LanguageSwitcher } from './components/LanguageSwitcher';
@@ -11,7 +12,7 @@ const SettingsPage = () => {
   return (
     <>
       <Helmet>
-        <title>{t('Settings')}</title>
+        <title>{t('seo.settings_title')}</title>
         <meta name="description" content={t('seo.settings_description')} />
       </Helmet>
       <div className="p-4 md:p-6 lg:p-8">

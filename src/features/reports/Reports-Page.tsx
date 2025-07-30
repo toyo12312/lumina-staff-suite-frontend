@@ -69,7 +69,7 @@ const ReportsPage = () => {
   return (
     <>
       <Helmet>
-        <title>{t('Reports')}</title>
+        <title>{t('seo.reports_title')}</title>
         <meta name="description" content={t('seo.reports_description')} />
       </Helmet>
       <div className="p-4 md:p-6 lg:p-8">
