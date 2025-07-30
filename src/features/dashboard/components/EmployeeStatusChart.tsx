@@ -1,4 +1,3 @@
-import React from 'react';
 import {
   PieChart,
   Pie,
@@ -8,7 +7,8 @@ import {
   Legend,
 } from 'recharts';
 import { useTranslation } from 'react-i18next';
-import { EmployeeStatus } from '../../../types';
+import type { EmployeeStatus } from '../../../types';
+import type { FC } from 'react';
 
 interface ChartData {
   active: number;
@@ -21,32 +21,33 @@ interface EmployeeStatusChartProps {
   isLoading: boolean;
 }
 
-export const EmployeeStatusChart: React.FC<EmployeeStatusChartProps> = ({
+const COLORS: Record<EmployeeStatus, string> = {
+  active: '#22c55e',
+  on_leave: '#f59e0b',
+  terminated: '#ef4444',
+};
+
+export const EmployeeStatusChart: FC<EmployeeStatusChartProps> = ({
   data,
   isLoading,
 }) => {
   const { t } = useTranslation();
-  const COLORS = {
-    [EmployeeStatus.Active]: '#22c55e',
-    [EmployeeStatus.OnLeave]: '#f59e0b',
-    [EmployeeStatus.Terminated]: '#ef4444',
-  };
 
   const chartData = [
     {
       name: t('dashboard.active'),
       value: data.active,
-      status: EmployeeStatus.Active,
+      status: 'active' as EmployeeStatus,
     },
     {
       name: t('dashboard.on_leave'),
       value: data.onLeave,
-      status: EmployeeStatus.OnLeave,
+      status: 'on_leave' as EmployeeStatus,
     },
     {
       name: t('dashboard.terminated'),
       value: data.terminated,
-      status: EmployeeStatus.Terminated,
+      status: 'terminated' as EmployeeStatus,
     },
   ].filter((item) => item.value > 0);
 
@@ -58,7 +59,9 @@ export const EmployeeStatusChart: React.FC<EmployeeStatusChartProps> = ({
 
   if (chartData.length === 0) {
     return (
-      <p className="text-gray-400">Немає даних для відображення діаграми.</p>
+      <p className="text-center text-gray-500 dark:text-gray-400 py-10">
+        {t('dashboard.no_chart_data')}
+      </p>
     );
   }
 
@@ -92,7 +95,6 @@ export const EmployeeStatusChart: React.FC<EmployeeStatusChartProps> = ({
           fill="#8884d8"
           dataKey="value"
           nameKey="name"
-          activeShape={{ style: { outline: 'none' } }}
         >
           {chartData.map((entry, index) => (
             <Cell key={`cell-${index}`} fill={COLORS[entry.status]} />

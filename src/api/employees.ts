@@ -1,18 +1,11 @@
-import { Employee, EmployeeStatus } from '../types';
+// Крок 1: Використовуємо 'type-only' імпорт для всіх типів
+import type { Employee } from '../types';
 
-const API_BASE_URL = '/api';
+const API_BASE_URL = '/api'; // Припускаємо, що у вас налаштовано проксі
 
-// Оновлюємо DTO, щоб він відповідав вимогам бекенду
-export interface CreateEmployeeDto {
-  firstName: string;
-  lastName: string;
-  position: string;
-  email: string;
-  // Додаємо обов'язкові поля
-  status: EmployeeStatus;
-  hireDate: string;
-}
-
+// Крок 2: Створюємо типи для DTO (Data Transfer Object) на основі базового типу Employee
+// Це робить код більш гнучким та уникає дублювання.
+export type CreateEmployeeDto = Omit<Employee, 'id'>;
 export type UpdateEmployeeDto = Partial<CreateEmployeeDto>;
 
 // Функція для отримання списку співробітників
@@ -21,8 +14,9 @@ export const getEmployees = async (search = ''): Promise<Employee[]> => {
   if (!response.ok) {
     throw new Error('Не вдалося завантажити список співробітників');
   }
+  // Припускаємо, що бекенд повертає { data: Employee[] }
   const result = await response.json();
-  return result.data;
+  return result.data || [];
 };
 
 // Функція для створення нового співробітника
@@ -36,9 +30,11 @@ export const createEmployee = async (
   });
   if (!response.ok) {
     const errorData = await response.json();
-    throw new Error(
-      errorData.message.join(', ') || 'Не вдалося створити співробітника',
-    );
+    // Очікуємо, що помилка може бути масивом
+    const message = Array.isArray(errorData.message)
+      ? errorData.message.join(', ')
+      : errorData.message;
+    throw new Error(message || 'Не вдалося створити співробітника');
   }
   return response.json();
 };
@@ -55,9 +51,10 @@ export const updateEmployee = async (
   });
   if (!response.ok) {
     const errorData = await response.json();
-    throw new Error(
-      errorData.message.join(', ') || 'Не вдалося оновити дані співробітника',
-    );
+    const message = Array.isArray(errorData.message)
+      ? errorData.message.join(', ')
+      : errorData.message;
+    throw new Error(message || 'Не вдалося оновити дані співробітника');
   }
   return response.json();
 };

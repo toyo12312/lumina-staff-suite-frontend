@@ -1,6 +1,11 @@
-import React from 'react';
+import type { FC } from 'react';
 
-const AppFilter = ({ filter, onFilterSelect }) => {
+interface AppFilterProps {
+  filter: string;
+  onFilterSelect: (filter: string) => void;
+}
+
+const AppFilter: FC<AppFilterProps> = ({ filter, onFilterSelect }) => {
   const buttonsData = [
     { name: 'all', label: 'Всі співробітники' },
     { name: 'moreThen1000', label: 'З/П більше 1000$' },
@@ -9,9 +14,9 @@ const AppFilter = ({ filter, onFilterSelect }) => {
   const buttons = buttonsData.map(({ name, label }) => {
     const isActive = filter === name;
     // Стилі для світлої та темної теми
-    const clazz = isActive 
-        ? 'bg-gray-800 text-white' 
-        : 'bg-white dark:bg-gray-600 hover:bg-gray-200 dark:hover:bg-gray-500 text-gray-800 dark:text-gray-300';
+    const clazz = isActive
+      ? 'bg-gray-800 text-white'
+      : 'bg-white dark:bg-gray-600 hover:bg-gray-200 dark:hover:bg-gray-500 text-gray-800 dark:text-gray-300';
     return (
       <button
         className={`py-2 px-4 rounded-md transition ${clazz}`}
@@ -24,11 +29,7 @@ const AppFilter = ({ filter, onFilterSelect }) => {
     );
   });
 
-  return (
-    <div className="flex justify-center space-x-2 mb-6">
-      {buttons}
-    </div>
-  );
+  return <div className="flex justify-center space-x-2 mb-6">{buttons}</div>;
 };
 
 export default AppFilter;

@@ -1,11 +1,35 @@
-import React, { createContext, useContext, useEffect, useState } from 'react';
+import {
+  createContext,
+  useContext,
+  useEffect,
+  useState,
+  type ReactNode,
+  type FC,
+} from 'react';
 
-const ThemeContext = createContext();
+type Theme = 'light' | 'dark';
 
-export const ThemeProvider = ({ children }) => {
-  const [theme, setTheme] = useState(() => {
-    // Витягуємо з localStorage або за замовчуванням "light"
-    return localStorage.getItem('theme') || 'light';
+interface ThemeContextType {
+  theme: Theme;
+  toggleTheme: () => void;
+}
+
+const ThemeContext = createContext<ThemeContextType>({
+  theme: 'light',
+  toggleTheme: () => console.warn('toggleTheme function not implemented'),
+});
+
+interface ThemeProviderProps {
+  children: ReactNode;
+}
+
+export const ThemeProvider: FC<ThemeProviderProps> = ({ children }) => {
+  const [theme, setTheme] = useState<Theme>(() => {
+    const savedTheme = localStorage.getItem('theme');
+
+    return savedTheme === 'light' || savedTheme === 'dark'
+      ? savedTheme
+      : 'light';
   });
 
   useEffect(() => {
@@ -21,7 +45,7 @@ export const ThemeProvider = ({ children }) => {
   }, [theme]);
 
   const toggleTheme = () => {
-    setTheme(prev => (prev === 'light' ? 'dark' : 'light'));
+    setTheme((prev) => (prev === 'light' ? 'dark' : 'light'));
   };
 
   return (
@@ -31,4 +55,4 @@ export const ThemeProvider = ({ children }) => {
   );
 };
 
-export const useTheme = () => useContext(ThemeContext);
+export const useTheme = (): ThemeContextType => useContext(ThemeContext);

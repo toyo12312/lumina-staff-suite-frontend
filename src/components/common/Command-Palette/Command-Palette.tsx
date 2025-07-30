@@ -1,14 +1,7 @@
-import React, { useEffect } from 'react';
+import { useEffect, type FC } from 'react';
 import { createPortal } from 'react-dom';
 import { Command } from 'cmdk';
-import {
-  LayoutDashboard,
-  Users,
-  FileText,
-  Settings,
-  Moon,
-  Sun,
-} from 'lucide-react';
+import { LayoutDashboard, Users, FileText, Settings, Sun } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
@@ -18,7 +11,7 @@ interface CommandPaletteProps {
   toggleTheme: () => void;
 }
 
-export const CommandPalette: React.FC<CommandPaletteProps> = ({
+export const CommandPalette: FC<CommandPaletteProps> = ({
   isOpen,
   setOpen,
   toggleTheme,
@@ -38,24 +31,6 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
     return () => document.removeEventListener('keydown', down);
   }, [isOpen, setOpen]);
 
-  useEffect(() => {
-    const originalHtmlOverflow = document.documentElement.style.overflow;
-    const originalBodyOverflow = document.body.style.overflow;
-
-    if (isOpen) {
-      document.documentElement.style.overflow = 'hidden';
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.documentElement.style.overflow = originalHtmlOverflow;
-      document.body.style.overflow = originalBodyOverflow;
-    }
-
-    return () => {
-      document.documentElement.style.overflow = originalHtmlOverflow;
-      document.body.style.overflow = originalBodyOverflow;
-    };
-  }, [isOpen]);
-
   const runCommand = (command: () => void) => {
     setOpen(false);
     command();
@@ -67,8 +42,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
 
   return createPortal(
     <div
-      className="fixed inset-0 bg-black/50 flex items-start justify-center pt-16"
-      style={{ zIndex: -9999 }}
+      className="fixed inset-0 bg-black/50 flex items-start justify-center pt-16 z-50"
       onClick={() => setOpen(false)}
     >
       <Command.Dialog

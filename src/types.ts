@@ -1,25 +1,16 @@
-// --- Enums (Перелічення) ---
+// --- Types (Типи) ---
 
 /**
  * Можливі статуси співробітника.
- * Використання Enum захищає від помилок з рядками.
+ * Використовуємо об'єднання рядкових літералів замість enum для кращої сумісності.
  */
-export enum EmployeeStatus {
-  Active = 'active',
-  OnLeave = 'on_leave',
-  Terminated = 'terminated',
-}
+export type EmployeeStatus = 'active' | 'on_leave' | 'terminated';
 
 /**
  * ID для кожної сторінки/виду в додатку.
  * Дозволяє уникнути "магічних рядків" в навігації.
  */
-export enum AppView {
-  Dashboard = 'dashboard',
-  Employees = 'employees',
-  Reports = 'reports',
-  Settings = 'settings',
-}
+export type AppView = 'dashboard' | 'employees' | 'reports' | 'settings';
 
 // --- Interfaces (Опис структури об'єктів) ---
 
@@ -31,10 +22,10 @@ export interface Employee {
   id: number | string; // ID може бути числом або рядком
   firstName: string;
   lastName: string;
-  position: string;
   email: string;
+  position: string;
   phone?: string; // Знак '?' означає, що поле не є обов'язковим
-  status: EmployeeStatus; // Використовуємо наш Enum для статусу
+  status: EmployeeStatus; // Використовуємо наш тип для статусу
   hireDate: string; // Дату краще зберігати у форматі ISO (e.g., "2023-10-27T10:00:00Z")
 }
 
@@ -44,20 +35,5 @@ export interface Employee {
 export interface Report {
   id: number;
   title: string;
-  generatedAt: string;
-  data: unknown; // 'unknown' краще, ніж 'any', бо змушує робити перевірку типу
-}
-
-// --- Generics (Узагальнені типи) ---
-
-/**
- * Узагальнений тип для відповіді від API.
- * Може використовуватися для будь-яких даних (співробітники, звіти тощо).
- * <T> - це "шаблон", куди ми підставимо конкретний тип (наприклад, Employee[]).
- */
-export interface ApiResponse<T> {
-  data: T;
-  total: number;
-  page: number;
-  limit: number;
+  // ... інші поля для звіту
 }

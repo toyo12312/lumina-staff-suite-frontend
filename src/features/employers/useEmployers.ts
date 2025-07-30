@@ -1,5 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
-import { Employee, CreateEmployeeDto } from '../../types';
+
+import type { Employee } from '../../types';
 import {
   getEmployees,
   createEmployee,
@@ -7,9 +8,10 @@ import {
   deleteEmployee,
 } from '../../api/employees';
 
-// Це наш новий кастомний хук, який інкапсулює всю логіку
+export type CreateEmployeeDto = Omit<Employee, 'id'>;
+export type UpdateEmployeeDto = Partial<CreateEmployeeDto>;
+
 export const useEmployees = () => {
-  // --- Стан ---
   const [employees, setEmployees] = useState<Employee[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -17,14 +19,13 @@ export const useEmployees = () => {
   const [isModalOpen, setModalOpen] = useState(false);
   const [editingEmployee, setEditingEmployee] = useState<Employee | null>(null);
 
-  // --- Логіка завантаження даних ---
   const fetchAndSetEmployees = useCallback(async (query: string) => {
     try {
       setIsLoading(true);
       const data = await getEmployees(query);
       setEmployees(data);
       setError(null);
-    } catch (err) {
+    } catch (err: any) {
       if (err.name !== 'AbortError') {
         setError(err.message);
       }
@@ -33,7 +34,6 @@ export const useEmployees = () => {
     }
   }, []);
 
-  // --- Ефект для пошуку з дебаунсом ---
   useEffect(() => {
     const delayDebounceFn = setTimeout(() => {
       fetchAndSetEmployees(searchTerm);
@@ -42,37 +42,39 @@ export const useEmployees = () => {
     return () => clearTimeout(delayDebounceFn);
   }, [searchTerm, fetchAndSetEmployees]);
 
-  // --- Обробники подій (CRUD) ---
-  const handleSave = async (employeeData) => {
+  const handleSave = async (employeeData: UpdateEmployeeDto) => {
     try {
       if (editingEmployee) {
-        await updateEmployee(editingEmployee.id, employeeData);
+        await updateEmployee(Number(editingEmployee.id), employeeData);
       } else {
         const newEmployeeData: CreateEmployeeDto = {
-          ...employeeData,
-          hireDate: new Date().toISOString().split('T')[0],
+          firstName: employeeData.firstName || '',
+          lastName: employeeData.lastName || '',
+          email: employeeData.email || '',
+          position: employeeData.position || '',
+          status: employeeData.status || 'active',
+          hireDate: new Date().toISOString(),
         };
         await createEmployee(newEmployeeData);
       }
-      await fetchAndSetEmployees(searchTerm); // Оновлюємо список
-      setModalOpen(false); // Закриваємо модалку
-    } catch (err) {
+      await fetchAndSetEmployees(searchTerm);
+      setModalOpen(false);
+    } catch (err: any) {
       setError(err.message);
     }
   };
 
   const handleDelete = async (employeeId: number) => {
-    if (prompt("Введіть 'видалити' для підтвердження:") === 'видалити') {
+    if (window.prompt("Введіть 'видалити' для підтвердження:") === 'видалити') {
       try {
         await deleteEmployee(employeeId);
-        await fetchAndSetEmployees(searchTerm); // Оновлюємо список
-      } catch (err) {
+        await fetchAndSetEmployees(searchTerm);
+      } catch (err: any) {
         setError(err.message);
       }
     }
   };
 
-  // --- Обробники для модального вікна ---
   const openEditModal = (employee: Employee) => {
     setEditingEmployee(employee);
     setModalOpen(true);
@@ -87,7 +89,6 @@ export const useEmployees = () => {
     setModalOpen(false);
   };
 
-  // --- Повертаємо все, що потрібно компоненту ---
   return {
     employees,
     isLoading,

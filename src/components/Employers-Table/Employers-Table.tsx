@@ -1,41 +1,126 @@
-import React from 'react';
+import type { FC } from 'react';
 
-const EmployeesTable = ({ employees, onEditClick, onDeleteClick, onToggleRise }) => {
-    return (
-        <div className="overflow-x-auto rounded-lg border border-gray-200 dark:border-gray-700">
-            <table className="min-w-full bg-white dark:bg-gray-800">
-                <thead className="bg-gray-50 dark:bg-gray-700">
-                    <tr>
-                        <th className="py-3 px-6 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Ім'я</th>
-                        <th className="py-3 px-6 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Посада</th>
-                        <th className="py-3 px-6 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Зарплата</th>
-                        <th className="py-3 px-6 text-right text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Дії</th>
-                    </tr>
-                </thead>
-                <tbody className="divide-y divide-gray-200 dark:divide-gray-700">
-                    {employees.map(employee => (
-                        <tr key={employee.id} className={`transition-colors ${employee.rise ? 'bg-yellow-100 dark:bg-yellow-500/10' : 'bg-white dark:bg-gray-800'} hover:bg-gray-50 dark:hover:bg-gray-700/50`}>
-                            <td className="py-4 px-6 whitespace-nowrap font-medium text-gray-900 dark:text-gray-100">{employee.name}</td>
-                            <td className="py-4 px-6 whitespace-nowrap text-gray-600 dark:text-gray-400">{employee.position}</td>
-                            <td className="py-4 px-6 whitespace-nowrap text-gray-600 dark:text-gray-400">${employee.salary}</td>
-                            <td className="py-4 px-6 whitespace-nowrap text-right text-sm font-medium flex justify-end items-center space-x-4">
-                                {/* --- ПОВЕРТАЄМО КНОПКУ ДЛЯ БОНУСУ --- */}
-                                <button onClick={() => onToggleRise(employee.id, employee.rise)} className="text-gray-400 hover:text-yellow-500 transition" title="Бонус">
-                                    <svg className={`w-5 h-5 ${employee.rise ? 'text-yellow-500' : ''}`} fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
-                                </button>
-                                <button onClick={() => onEditClick(employee)} className="text-gray-400 hover:text-blue-600 transition" title="Редагувати">
-                                    <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z"></path><path fillRule="evenodd" d="M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z" clipRule="evenodd"></path></svg>
-                                </button>
-                                <button onClick={() => onDeleteClick(employee.id)} className="text-gray-400 hover:text-red-600 transition" title="Видалити">
-                                    <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm4 0a1 1 0 012 0v6a1 1 0 11-2 0V8z" clipRule="evenodd"></path></svg>
-                                </button>
-                            </td>
-                        </tr>
-                    ))}
-                </tbody>
-            </table>
-        </div>
-    );
+import type { Employee } from '../../types';
+import { useTranslation } from 'react-i18next';
+
+interface EmployeesTableProps {
+  employees: Employee[];
+  onEditClick: (employee: Employee) => void;
+  onDeleteClick: (id: number | string) => void;
+}
+
+const EmployeesTable: FC<EmployeesTableProps> = ({
+  employees,
+  onEditClick,
+  onDeleteClick,
+}) => {
+  const { t } = useTranslation();
+
+  const getStatusClasses = (status: string) => {
+    switch (status) {
+      case 'active':
+        return 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300';
+      case 'on_leave':
+        return 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-300';
+      case 'terminated':
+        return 'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-300';
+      default:
+        return 'bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-300';
+    }
+  };
+
+  return (
+    <div className="overflow-x-auto rounded-lg border border-gray-200 dark:border-gray-700">
+      <table className="min-w-full bg-white dark:bg-gray-800">
+        <thead className="bg-gray-50 dark:bg-gray-700">
+          <tr>
+            {/* Крок 3: Оновлюємо заголовки таблиці відповідно до типу Employee */}
+            <th className="py-3 px-6 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
+              {t('employees.table_header_name')}
+            </th>
+            <th className="py-3 px-6 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
+              {t('employees.table_header_position')}
+            </th>
+            <th className="py-3 px-6 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
+              {t('employees.table_header_email')}
+            </th>
+            <th className="py-3 px-6 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
+              {t('employees.table_header_status')}
+            </th>
+            <th className="py-3 px-6 text-right text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
+              {t('employees.table_header_actions')}
+            </th>
+          </tr>
+        </thead>
+        <tbody className="divide-y divide-gray-200 dark:divide-gray-700">
+          {employees.map((employee) => (
+            // Крок 4: Оновлюємо дані в рядках відповідно до типу Employee
+            <tr
+              key={employee.id}
+              className="bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-colors"
+            >
+              <td className="py-4 px-6 whitespace-nowrap font-medium text-gray-900 dark:text-gray-100">
+                {employee.firstName} {employee.lastName}
+              </td>
+              <td className="py-4 px-6 whitespace-nowrap text-gray-600 dark:text-gray-400">
+                {employee.position}
+              </td>
+              <td className="py-4 px-6 whitespace-nowrap text-gray-600 dark:text-gray-400">
+                {employee.email}
+              </td>
+              <td className="py-4 px-6 whitespace-nowrap">
+                <span
+                  className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${getStatusClasses(employee.status)}`}
+                >
+                  {t(`employees.status.${employee.status}`)}
+                </span>
+              </td>
+              <td className="py-4 px-6 whitespace-nowrap text-right text-sm font-medium flex justify-end items-center space-x-4">
+                <button
+                  onClick={() => onEditClick(employee)}
+                  className="text-gray-400 hover:text-blue-600 transition"
+                  title={t('employees.edit_tooltip')}
+                >
+                  <svg
+                    className="w-5 h-5"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.5L14.732 3.732z"
+                    ></path>
+                  </svg>
+                </button>
+                <button
+                  onClick={() => onDeleteClick(employee.id)}
+                  className="text-gray-400 hover:text-red-600 transition"
+                  title={t('employees.delete_tooltip')}
+                >
+                  <svg
+                    className="w-5 h-5"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
+                    ></path>
+                  </svg>
+                </button>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  );
 };
 
 export default EmployeesTable;

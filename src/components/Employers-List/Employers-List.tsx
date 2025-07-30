@@ -1,25 +1,55 @@
-import React from 'react';
-import EmployeesListItem from '../Employers-List-Item/Employers-List-Item';
+import type { FC } from 'react';
+import { useTranslation } from 'react-i18next';
 
-function EmployeesList({ employees, onDelete, onEdit }) {
+import type { Employee } from '../../types';
+import { EmployeeRow } from '../../features/employers/components/EmployeeRow';
+
+interface EmployeesListProps {
+  employees: Employee[];
+  onDelete: (id: number | string) => void;
+  onEdit: (employee: Employee) => void;
+}
+
+export const EmployeesList: FC<EmployeesListProps> = ({
+  employees,
+  onDelete,
+  onEdit,
+}) => {
+  const { t } = useTranslation();
+
   if (employees.length === 0) {
-    return <p className="text-center text-gray-400 mt-8">Немає співробітників для відображення.</p>;
+    return (
+      <p className="text-center text-gray-500 dark:text-gray-400 mt-8">
+        {t('employees.no_employees')}
+      </p>
+    );
   }
 
   return (
-    <div className="overflow-x-auto rounded-lg shadow-md">
-      <table className="min-w-full bg-gray-700 text-gray-100">
-        <thead className="bg-gray-600 border-b border-gray-500">
+    <div className="overflow-x-auto rounded-lg border border-gray-200 dark:border-gray-700">
+      <table className="min-w-full bg-white dark:bg-gray-800">
+        <thead className="bg-gray-50 dark:bg-gray-700">
           <tr>
-            <th className="py-3 px-6 text-left text-xs font-medium uppercase tracking-wider">Ім'я</th>
-            <th className="py-3 px-6 text-left text-xs font-medium uppercase tracking-wider">Посада</th>
-            <th className="py-3 px-6 text-left text-xs font-medium uppercase tracking-wider">Зарплата</th>
-            <th className="py-3 px-6 text-right text-xs font-medium uppercase tracking-wider">Дії</th>
+            <th className="py-3 px-6 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
+              {t('employees.table_header_name')}
+            </th>
+            <th className="py-3 px-6 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
+              {t('employees.table_header_position')}
+            </th>
+            <th className="py-3 px-6 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
+              {t('employees.table_header_email')}
+            </th>
+            <th className="py-3 px-6 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
+              {t('employees.table_header_status')}
+            </th>
+            <th className="py-3 px-6 text-right text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
+              {t('employees.table_header_actions')}
+            </th>
           </tr>
         </thead>
-        <tbody className="divide-y divide-gray-600">
+        <tbody className="divide-y divide-gray-200 dark:divide-gray-700">
           {employees.map((employee) => (
-            <EmployeesListItem
+            <EmployeeRow
               key={employee.id}
               employee={employee}
               onDelete={onDelete}
@@ -30,6 +60,4 @@ function EmployeesList({ employees, onDelete, onEdit }) {
       </table>
     </div>
   );
-}
-
-export default EmployeesList;
+};

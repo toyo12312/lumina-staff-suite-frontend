@@ -1,23 +1,26 @@
-import React from 'react';
+import type { FC } from 'react';
 import { useTranslation } from 'react-i18next';
-import { EmployeeStatus } from '../../../types';
 
-export const StatusBadge = ({ status }: { status: EmployeeStatus }) => {
+import type { EmployeeStatus } from '../../../types';
+
+interface StatusBadgeProps {
+  status: EmployeeStatus;
+}
+
+const statusStyles: Record<EmployeeStatus, string> = {
+  active: 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300',
+  on_leave:
+    'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-300',
+  terminated: 'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-300',
+};
+
+export const StatusBadge: FC<StatusBadgeProps> = ({ status }) => {
   const { t } = useTranslation();
 
-  const statusStyles = {
-    [EmployeeStatus.Active]:
-      'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300',
-    [EmployeeStatus.OnLeave]:
-      'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-300',
-    [EmployeeStatus.Terminated]:
-      'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-300',
-  };
-
-  const statusText = {
-    [EmployeeStatus.Active]: t('employees.status.active'),
-    [EmployeeStatus.OnLeave]: t('employees.status.on_leave'),
-    [EmployeeStatus.Terminated]: t('employees.status.terminated'),
+  const statusText: Record<EmployeeStatus, string> = {
+    active: t('employees.status.active'),
+    on_leave: t('employees.status.on_leave'),
+    terminated: t('employees.status.terminated'),
   };
 
   return (

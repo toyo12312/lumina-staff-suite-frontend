@@ -1,39 +1,67 @@
-import React, { useState } from 'react';
+import {
+  useState,
+  useEffect,
+  type FC,
+  type ChangeEvent,
+  type FormEvent,
+} from 'react';
 import { X } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
-import { Employee, EmployeeStatus } from '../../../types';
+// Крок 1: Імпортуємо всі необхідні типи
+import type { Employee, EmployeeStatus } from '../../../types';
+import type { UpdateEmployeeDto } from '../../../features/employers/useEmployers';
 
+// Крок 2: Створюємо інтерфейс для props
 interface EmployeeModalProps {
   employee: Partial<Employee> | null;
   onClose: () => void;
-  onSave: (employeeData: any) => void;
+  onSave: (employeeData: UpdateEmployeeDto) => void;
 }
 
-export const EmployeeModal: React.FC<EmployeeModalProps> = ({
+// Крок 3: Створюємо масив можливих статусів для select
+const statusOptions: EmployeeStatus[] = ['active', 'on_leave', 'terminated'];
+
+export const EmployeeModal: FC<EmployeeModalProps> = ({
   employee,
   onClose,
   onSave,
 }) => {
   const { t } = useTranslation();
-  const [formData, setFormData] = useState({
-    firstName: '',
-    lastName: '',
-    position: '',
-    email: '',
-    status: EmployeeStatus.Active,
-    ...employee,
-  });
+  // Крок 4: Типізуємо стан форми
+  const [formData, setFormData] = useState<UpdateEmployeeDto>({});
 
   const isEditing = !!employee?.id;
 
+  // Крок 5: Використовуємо useEffect для синхронізації форми з props
+  useEffect(() => {
+    if (employee) {
+      setFormData({
+        firstName: employee.firstName || '',
+        lastName: employee.lastName || '',
+        position: employee.position || '',
+        email: employee.email || '',
+        status: employee.status || 'active',
+      });
+    } else {
+      // Скидаємо форму, коли створюємо нового співробітника
+      setFormData({
+        firstName: '',
+        lastName: '',
+        position: '',
+        email: '',
+        status: 'active',
+      });
+    }
+  }, [employee]);
+
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
+    e: ChangeEvent<HTMLInputElement | HTMLSelectElement>,
   ) => {
     const { id, value } = e.target;
     setFormData((prev) => ({ ...prev, [id]: value }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
     onSave(formData);
   };
@@ -67,7 +95,7 @@ export const EmployeeModal: React.FC<EmployeeModalProps> = ({
                 <input
                   type="text"
                   id="firstName"
-                  value={formData.firstName}
+                  value={formData.firstName || ''}
                   onChange={handleChange}
                   className="w-full p-2.5 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
                   required
@@ -83,7 +111,7 @@ export const EmployeeModal: React.FC<EmployeeModalProps> = ({
                 <input
                   type="text"
                   id="lastName"
-                  value={formData.lastName}
+                  value={formData.lastName || ''}
                   onChange={handleChange}
                   className="w-full p-2.5 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
                   required
@@ -100,7 +128,7 @@ export const EmployeeModal: React.FC<EmployeeModalProps> = ({
               <input
                 type="text"
                 id="position"
-                value={formData.position}
+                value={formData.position || ''}
                 onChange={handleChange}
                 className="w-full p-2.5 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
                 required
@@ -116,7 +144,7 @@ export const EmployeeModal: React.FC<EmployeeModalProps> = ({
               <input
                 type="email"
                 id="email"
-                value={formData.email}
+                value={formData.email || ''}
                 onChange={handleChange}
                 className="w-full p-2.5 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
                 required
@@ -129,21 +157,18 @@ export const EmployeeModal: React.FC<EmployeeModalProps> = ({
               >
                 {t('employees.form_label_status')}
               </label>
+              {/* Крок 6: Оновлюємо select, щоб він працював з рядковими значеннями */}
               <select
                 id="status"
-                value={formData.status}
+                value={formData.status || 'active'}
                 onChange={handleChange}
                 className="w-full p-2.5 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
               >
-                <option value={EmployeeStatus.Active}>
-                  {t('employees.status.active')}
-                </option>
-                <option value={EmployeeStatus.OnLeave}>
-                  {t('employees.status.on_leave')}
-                </option>
-                <option value={EmployeeStatus.Terminated}>
-                  {t('employees.status.terminated')}
-                </option>
+                {statusOptions.map((statusValue) => (
+                  <option key={statusValue} value={statusValue}>
+                    {t(`employees.status.${statusValue}`)}
+                  </option>
+                ))}
               </select>
             </div>
           </div>

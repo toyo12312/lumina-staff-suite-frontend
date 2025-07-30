@@ -1,7 +1,12 @@
-import React from 'react';
+import type { FC, Dispatch, SetStateAction } from 'react';
 import { NavLink } from 'react-router-dom';
 import { LayoutDashboard, Users, FileText, Settings, X } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
+
+interface SidebarProps {
+  isOpen: boolean;
+  setOpen: Dispatch<SetStateAction<boolean>>;
+}
 
 const Logo = () => (
   <div className="flex items-center gap-3 px-4 mb-8">
@@ -16,11 +21,9 @@ const Logo = () => (
   </div>
 );
 
-const Sidebar = ({ isOpen, setOpen }) => {
+const Sidebar: FC<SidebarProps> = ({ isOpen, setOpen }) => {
   const { t } = useTranslation();
 
-  // --- ОСНОВНА ЗМІНА: Переносимо масив посилань всередину компонента ---
-  // Це необхідно, тому що функція t() доступна тільки всередині компонента
   const navLinks = [
     { to: '/dashboard', icon: LayoutDashboard, text: t('sidebar.dashboard') },
     { to: '/employees', icon: Users, text: t('sidebar.employees') },

@@ -1,14 +1,14 @@
-import React from 'react';
-import { LucideProps } from 'lucide-react';
+import type { FC, ElementType } from 'react';
+import type { LucideProps } from 'lucide-react';
 
 interface StatCardProps {
-  icon: React.ElementType<LucideProps>;
+  icon: ElementType<LucideProps>;
   title: string;
   value: number | string;
   isLoading: boolean;
 }
 
-export const StatCard: React.FC<StatCardProps> = ({
+export const StatCard: FC<StatCardProps> = ({
   icon: IconComponent,
   title,
   value,

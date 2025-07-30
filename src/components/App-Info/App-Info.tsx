@@ -1,12 +1,24 @@
-import React from 'react';
+import type { FC } from 'react';
+interface AppInfoProps {
+  employeesCount: number;
+  employeesToRiseCount: number;
+}
 
-const AppInfo = ({ employeesCount, employeesToRiseCount }) => {
+const AppInfo: FC<AppInfoProps> = ({
+  employeesCount,
+  employeesToRiseCount,
+}) => {
   return (
-    // Задаємо стилі для світлої теми, а потім для темної через dark:
-    <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md mb-6 text-gray-800 dark:text-white">
-      <h1 style={{ fontFamily: "'Cormorant Garamond', serif" }} className="text-3xl font-bold text-center text-gray-700 dark:text-gray-200">Облік співробітників у компанії LUMINA</h1>
-      <p className="text-xl text-center mt-2">Загальна кількість співробітників: {employeesCount}</p>
-      <p className="text-xl text-center mt-1">Премію отримають: {employeesToRiseCount}</p>
+    <div className="p-6 bg-white dark:bg-gray-800 rounded-lg shadow-md text-gray-800 dark:text-white">
+      <h1 className="text-3xl font-bold text-center mb-2">
+        Облік співробітників в компанії LUMINA
+      </h1>
+      <h2 className="text-xl text-center mb-2">
+        Загальна кількість співробітників: {employeesCount}
+      </h2>
+      <h2 className="text-xl text-center">
+        Премію отримають: {employeesToRiseCount}
+      </h2>
     </div>
   );
 };
