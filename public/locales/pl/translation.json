@@ -1,4 +1,14 @@
 {
+  "seo": {
+    "dashboard_title": "Panel | Lumina",
+    "dashboard_description": "Przegląd kluczowych wskaźników wydajności Twojego zespołu.",
+    "employees_title": "Pracownicy | Lumina",
+    "employees_description": "Zarządzaj listą swoich pracowników.",
+    "reports_title": "Raporty | Lumina",
+    "reports_description": "Twórz i eksportuj raporty.",
+    "settings_title": "Ustawienia | Lumina",
+    "settings_description": "Ustawienia konfiguracyjne aplikacji."
+  },
   "sidebar": {
     "dashboard": "Pulpit",
     "employees": "Pracownicy",

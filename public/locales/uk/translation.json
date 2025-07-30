@@ -1,4 +1,14 @@
 {
+  "seo": {
+    "dashboard_title": "Дашборд | Lumina",
+    "dashboard_description": "Огляд ключових показників вашої команди.",
+    "employees_title": "Співробітники | Lumina",
+    "employees_description": "Керування списком співробітників.",
+    "reports_title": "Звіти | Lumina",
+    "reports_description": "Створення та експорт звітів.",
+    "settings_title": "Налаштування | Lumina",
+    "settings_description": "Налаштування додатку."
+  },
   "sidebar": {
     "dashboard": "Дашборд",
     "employees": "Співробітники",

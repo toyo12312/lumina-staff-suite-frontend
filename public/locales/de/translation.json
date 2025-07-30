@@ -1,4 +1,14 @@
 {
+  "seo": {
+    "dashboard_title": "Dashboard | Lumina",
+    "dashboard_description": "Überblick über die wichtigsten Leistungsindikatoren Ihres Teams.",
+    "employees_title": "Mitarbeiter | Lumina",
+    "employees_description": "Verwalten Sie Ihre Mitarbeiterliste.",
+    "reports_title": "Berichte | Lumina",
+    "reports_description": "Erstellen und exportieren Sie Berichte.",
+    "settings_title": "Einstellungen | Lumina",
+    "settings_description": "Anwendungseinstellungen."
+  },
   "sidebar": {
     "dashboard": "Dashboard",
     "employees": "Mitarbeiter",

@@ -1,4 +1,14 @@
 {
+  "seo": {
+    "dashboard_title": "Tableau de bord | Lumina",
+    "dashboard_description": "Aperçu des indicateurs de performance clés de votre équipe.",
+    "employees_title": "Employés | Lumina",
+    "employees_description": "Gérez votre liste d'employés.",
+    "reports_title": "Rapports | Lumina",
+    "reports_description": "Créez et exportez des rapports.",
+    "settings_title": "Paramètres | Lumina",
+    "settings_description": "Paramètres de configuration de l'application."
+  },
   "sidebar": {
     "dashboard": "Tableau de bord",
     "employees": "Employés",

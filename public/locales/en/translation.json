@@ -1,4 +1,14 @@
 {
+  "seo": {
+    "dashboard_title": "Dashboard | Lumina",
+    "dashboard_description": "Overview of your team's key performance indicators.",
+    "employees_title": "Employees | Lumina",
+    "employees_description": "Manage your list of employees.",
+    "reports_title": "Reports | Lumina",
+    "reports_description": "Create and export reports.",
+    "settings_title": "Settings | Lumina",
+    "settings_description": "Application configuration settings."
+  },
   "sidebar": {
     "dashboard": "Dashboard",
     "employees": "Employees",

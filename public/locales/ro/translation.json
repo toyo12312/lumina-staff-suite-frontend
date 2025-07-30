@@ -1,4 +1,14 @@
 {
+  "seo": {
+    "dashboard_title": "Panou de control | Lumina",
+    "dashboard_description": "Prezentare generală a indicatorilor cheie de performanță ai echipei dvs.",
+    "employees_title": "Angajați | Lumina",
+    "employees_description": "Gestionați lista de angajați.",
+    "reports_title": "Rapoarte | Lumina",
+    "reports_description": "Creați și exportați rapoarte.",
+    "settings_title": "Setări | Lumina",
+    "settings_description": "Setări de configurare a aplicației."
+  },
   "sidebar": {
     "dashboard": "Panou de control",
     "employees": "Angajați",
