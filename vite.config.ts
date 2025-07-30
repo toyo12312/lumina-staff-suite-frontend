@@ -5,11 +5,13 @@ import autoprefixer from 'autoprefixer';
 
 export default defineConfig({
   plugins: [react()],
+
   css: {
     postcss: {
       plugins: [tailwindcss, autoprefixer],
     },
   },
+
   server: {
     proxy: {
       '/api': {
@@ -20,9 +22,7 @@ export default defineConfig({
     },
   },
 
-  build: {
-    rollupOptions: {
-      external: ['react-is'],
-    },
+  optimizeDeps: {
+    include: ['react-is'],
   },
 });
