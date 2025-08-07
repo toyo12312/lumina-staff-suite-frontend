@@ -1,17 +1,16 @@
 import React, { useState, useEffect, Suspense } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 
-// --- ОСНОВНА ЗМІНА: Оновлено всі шляхи після рефакторингу ---
 import Sidebar from './components/common/Sidebar/Sidebar';
 import { CommandPalette } from './components/common/Command-Palette/Command-Palette';
 import { useTheme } from './features/settings/useTheme';
 
-// Ледаче завантаження (Lazy Loading) для сторінок для кращої продуктивності
+// Ледаче завантаження (Lazy Loading) для сторінок
 const DashboardPage = React.lazy(
   () => import('./features/dashboard/Dashboard-Page'),
 );
 const EmployeesPage = React.lazy(
-  () => import('./features/employers/Employers-Page'),
+  () => import('./features/employees/Employees-Page'),
 );
 const ReportsPage = React.lazy(() => import('./features/reports/Reports-Page'));
 const SettingsPage = React.lazy(
@@ -21,12 +20,28 @@ const NotFoundPage = React.lazy(
   () => import('./features/notfound/NotFoundPage'),
 );
 
-// Компонент-заглушка, який буде показуватись, поки завантажуються сторінки/переклади
 const PageLoader = () => (
   <div className="flex items-center justify-center h-screen w-full">
-    <p className="text-slate-800 dark:text-slate-200 text-lg">
-      Завантаження...
-    </p>
+    <svg
+      className="animate-spin h-8 w-8 text-slate-500 dark:text-slate-400"
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 24 24"
+    >
+      <circle
+        className="opacity-25"
+        cx="12"
+        cy="12"
+        r="10"
+        stroke="currentColor"
+        strokeWidth="4"
+      ></circle>
+      <path
+        className="opacity-75"
+        fill="currentColor"
+        d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+      ></path>
+    </svg>
   </div>
 );
 
@@ -35,7 +50,6 @@ function App() {
   const { toggleTheme } = useTheme();
   const [isCommandPaletteOpen, setCommandPaletteOpen] = useState(false);
 
-  // Обробник для виклику командної палітри
   useEffect(() => {
     const down = (e: KeyboardEvent) => {
       if (e.key === 'k' && (e.metaKey || e.ctrlKey)) {
@@ -57,8 +71,7 @@ function App() {
         setOpen={setCommandPaletteOpen}
         toggleTheme={toggleTheme}
       />
-
-      <div className="relative md:ml-64">
+      <div className="relative md:ml-64 overflow-x-hidden">
         <header className="p-4 md:hidden sticky top-0 bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm z-30 border-b border-slate-200 dark:border-gray-700">
           <button
             onClick={() => setSidebarOpen(true)}
