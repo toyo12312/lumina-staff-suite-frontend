@@ -10,7 +10,7 @@ const DashboardPage = React.lazy(
   () => import('./features/dashboard/Dashboard-Page'),
 );
 const EmployeesPage = React.lazy(
-  () => import('./features/employees/Employees-Page'),
+  () => import('./features/employers/Employers-Page'),
 );
 const ReportsPage = React.lazy(() => import('./features/reports/Reports-Page'));
 const SettingsPage = React.lazy(
