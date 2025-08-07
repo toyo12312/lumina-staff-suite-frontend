@@ -28,10 +28,19 @@
     <link rel="manifest" href="/site.webmanifest" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Lumina Staff Suite</title>
-
-    <!-- ОСНОВНА ЗМІНА ТУТ -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-89E90K7F61"
+    ></script>
     <script>
-      // Цей скрипт миттєво застосовує тему, щоб уникнути "миготіння"
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag('js', new Date());
+      gtag('config', 'G-89E90K7F61');
+    </script>
+    <script>
       (function () {
         if (
           localStorage.theme === 'dark' ||
