@@ -13,7 +13,6 @@ const AppFilter: FC<AppFilterProps> = ({ filter, onFilterSelect }) => {
 
   const buttons = buttonsData.map(({ name, label }) => {
     const isActive = filter === name;
-    // Стилі для світлої та темної теми
     const clazz = isActive
       ? 'bg-gray-800 text-white'
       : 'bg-white dark:bg-gray-600 hover:bg-gray-200 dark:hover:bg-gray-500 text-gray-800 dark:text-gray-300';

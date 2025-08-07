@@ -34,7 +34,6 @@ const EmployeesTable: FC<EmployeesTableProps> = ({
       <table className="min-w-full bg-white dark:bg-gray-800">
         <thead className="bg-gray-50 dark:bg-gray-700">
           <tr>
-            {/* Крок 3: Оновлюємо заголовки таблиці відповідно до типу Employee */}
             <th className="py-3 px-6 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
               {t('employees.table_header_name')}
             </th>
@@ -54,7 +53,6 @@ const EmployeesTable: FC<EmployeesTableProps> = ({
         </thead>
         <tbody className="divide-y divide-gray-200 dark:divide-gray-700">
           {employees.map((employee) => (
-            // Крок 4: Оновлюємо дані в рядках відповідно до типу Employee
             <tr
               key={employee.id}
               className="bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-colors"
