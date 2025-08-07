@@ -5,6 +5,32 @@ import { useEmployees } from './useEmployers';
 import { EmployeeRow } from './components/EmployeeRow';
 import { EmployeeModal } from './components/EmployeeModal';
 
+// Створюємо маленький компонент спінера для відображення завантаження
+const Spinner = () => (
+  <div className="flex justify-center items-center p-10">
+    <svg
+      className="animate-spin h-8 w-8 text-slate-500 dark:text-slate-400"
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 24 24"
+    >
+      <circle
+        className="opacity-25"
+        cx="12"
+        cy="12"
+        r="10"
+        stroke="currentColor"
+        strokeWidth="4"
+      ></circle>
+      <path
+        className="opacity-75"
+        fill="currentColor"
+        d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+      ></path>
+    </svg>
+  </div>
+);
+
 const EmployeesPage = () => {
   const { t } = useTranslation();
   const {
@@ -60,9 +86,9 @@ const EmployeesPage = () => {
             />
           </div>
         </div>
-        <div className="bg-white dark:bg-gray-800 shadow-md rounded-lg overflow-x-auto">
+        <div className="bg-white dark:bg-gray-800 shadow-md rounded-lg overflow-x-auto min-h-[300px]">
           {isLoading ? (
-            <div className="p-6 text-center">Завантаження...</div>
+            <Spinner />
           ) : error ? (
             <div className="p-6 text-center text-red-500">{error}</div>
           ) : (
@@ -76,15 +102,13 @@ const EmployeesPage = () => {
                     {t('employees.table_header_position')}
                   </th>
                   <th scope="col" className="px-6 py-3">
-                    {t('employees.table_header_status')}
-                  </th>
-                  <th scope="col" className="px-6 py-3">
                     {t('employees.table_header_email')}
                   </th>
                   <th scope="col" className="px-6 py-3">
-                    <span className="sr-only">
-                      {t('employees.table_header_actions')}
-                    </span>
+                    {t('employees.table_header_status')}
+                  </th>
+                  <th scope="col" className="px-6 py-3 text-right">
+                    {t('employees.table_header_actions')}
                   </th>
                 </tr>
               </thead>
@@ -101,7 +125,7 @@ const EmployeesPage = () => {
                 ) : (
                   <tr>
                     <td colSpan={5} className="text-center p-6">
-                      Співробітників не знайдено.
+                      {t('employees.no_employees_found')}
                     </td>
                   </tr>
                 )}
