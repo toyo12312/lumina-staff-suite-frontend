@@ -1,15 +1,14 @@
 import { useState, type FC, type ChangeEvent, type FormEvent } from 'react';
 import { useTranslation } from 'react-i18next';
-// Крок 1: Імпортуємо тип для даних форми з нашого хука
 import type { UpdateEmployeeDto } from '../../features/employers/useEmployers';
 
-// Крок 2: Створюємо інтерфейс для props
+
 interface EmployeesAddFormProps {
-  // Функція onSave тепер очікує об'єкт, що відповідає UpdateEmployeeDto
+  UpdateEmployeeDto
   onSave: (employee: UpdateEmployeeDto) => void;
 }
 
-// Початковий стан для нашої форми
+
 const initialState: UpdateEmployeeDto = {
   firstName: '',
   lastName: '',
@@ -19,24 +18,21 @@ const initialState: UpdateEmployeeDto = {
 
 const EmployeesAddForm: FC<EmployeesAddFormProps> = ({ onSave }) => {
   const { t } = useTranslation();
-  // Крок 3: Використовуємо єдиний стан для всієї форми
   const [formData, setFormData] = useState(initialState);
 
-  // Універсальний обробник для всіх полів вводу
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  // Крок 4: Типізуємо подію форми
+  
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     onSave(formData);
-    setFormData(initialState); // Очищуємо форму після відправки
+    setFormData(initialState);
   };
 
   return (
-    // Крок 5: Оновлюємо JSX відповідно до нової структури даних
     <form
       onSubmit={handleSubmit}
       className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md mb-8"
@@ -64,7 +60,6 @@ const EmployeesAddForm: FC<EmployeesAddFormProps> = ({ onSave }) => {
             required
           />
         </div>
-        {/* Поле для прізвища */}
         <div>
           <label
             htmlFor="lastName"
