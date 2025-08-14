@@ -21,8 +21,6 @@ i18n
       loadPath: '/locales/{{lng}}/translation.json',
     },
 
-    // --- ОСНОВНА ЗМІНА: Вмикаємо Suspense ---
-    // Це дозволить нашому <Suspense> в App.tsx "чекати" на завантаження перекладів
     react: {
       useSuspense: true,
     },
