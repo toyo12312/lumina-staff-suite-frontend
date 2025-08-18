@@ -5,7 +5,6 @@ import Sidebar from './components/common/Sidebar/Sidebar';
 import { CommandPalette } from './components/common/Command-Palette/Command-Palette';
 import { useTheme } from './features/settings/useTheme';
 
-// Ледаче завантаження (Lazy Loading) для сторінок
 const DashboardPage = React.lazy(
   () => import('./features/dashboard/Dashboard-Page'),
 );
