@@ -1,11 +1,6 @@
-/* 1. Спочатку всі імпорти шрифтів */
 @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
-/* ... та інші ваші імпорти ... */
 
-/* 2. Потім директиви Tailwind */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-/* 3. Тут можуть бути ваші власні кастомні стилі, якщо потрібно */
