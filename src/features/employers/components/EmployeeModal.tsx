@@ -7,18 +7,15 @@ import {
 } from 'react';
 import { X } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
-// Крок 1: Імпортуємо всі необхідні типи
 import type { Employee, EmployeeStatus } from '../../../types';
 import type { UpdateEmployeeDto } from '../../../features/employers/useEmployers';
 
-// Крок 2: Створюємо інтерфейс для props
 interface EmployeeModalProps {
   employee: Partial<Employee> | null;
   onClose: () => void;
   onSave: (employeeData: UpdateEmployeeDto) => void;
 }
 
-// Крок 3: Створюємо масив можливих статусів для select
 const statusOptions: EmployeeStatus[] = ['active', 'on_leave', 'terminated'];
 
 export const EmployeeModal: FC<EmployeeModalProps> = ({
@@ -27,12 +24,10 @@ export const EmployeeModal: FC<EmployeeModalProps> = ({
   onSave,
 }) => {
   const { t } = useTranslation();
-  // Крок 4: Типізуємо стан форми
   const [formData, setFormData] = useState<UpdateEmployeeDto>({});
 
   const isEditing = !!employee?.id;
 
-  // Крок 5: Використовуємо useEffect для синхронізації форми з props
   useEffect(() => {
     if (employee) {
       setFormData({
@@ -43,7 +38,6 @@ export const EmployeeModal: FC<EmployeeModalProps> = ({
         status: employee.status || 'active',
       });
     } else {
-      // Скидаємо форму, коли створюємо нового співробітника
       setFormData({
         firstName: '',
         lastName: '',
@@ -157,7 +151,6 @@ export const EmployeeModal: FC<EmployeeModalProps> = ({
               >
                 {t('employees.form_label_status')}
               </label>
-              {/* Крок 6: Оновлюємо select, щоб він працював з рядковими значеннями */}
               <select
                 id="status"
                 value={formData.status || 'active'}
