@@ -10,7 +10,7 @@ i18n
   .init({
     fallbackLng: 'en',
     supportedLngs: ['uk', 'en', 'pl', 'de', 'fr', 'ro'],
-    debug: false, // Вимикаємо для чистоти консолі
+    debug: false, 
 
     detection: {
       order: ['cookie', 'localStorage', 'navigator', 'htmlTag'],
