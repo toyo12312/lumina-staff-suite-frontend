@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 
 export const useTheme = () => {
   const [theme, setTheme] = useState(() => {
-    // Перевіряємо збережену тему або системні налаштування
     if (
       localStorage.theme === 'dark' ||
       (!('theme' in localStorage) &&
