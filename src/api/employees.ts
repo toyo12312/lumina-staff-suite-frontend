@@ -1,25 +1,21 @@
-// Крок 1: Використовуємо 'type-only' імпорт для всіх типів
+
 import type { Employee } from '../types';
 
-const API_BASE_URL = '/api'; // Припускаємо, що у вас налаштовано проксі
+const API_BASE_URL = '/api'; 
 
-// Крок 2: Створюємо типи для DTO (Data Transfer Object) на основі базового типу Employee
-// Це робить код більш гнучким та уникає дублювання.
 export type CreateEmployeeDto = Omit<Employee, 'id'>;
 export type UpdateEmployeeDto = Partial<CreateEmployeeDto>;
 
-// Функція для отримання списку співробітників
 export const getEmployees = async (search = ''): Promise<Employee[]> => {
   const response = await fetch(`${API_BASE_URL}/employees?search=${search}`);
   if (!response.ok) {
     throw new Error('Не вдалося завантажити список співробітників');
   }
-  // Припускаємо, що бекенд повертає { data: Employee[] }
+   { data: Employee[] }
   const result = await response.json();
   return result.data || [];
 };
 
-// Функція для створення нового співробітника
 export const createEmployee = async (
   employeeData: CreateEmployeeDto,
 ): Promise<Employee> => {
