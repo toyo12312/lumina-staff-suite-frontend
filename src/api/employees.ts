@@ -26,7 +26,6 @@ export const createEmployee = async (
   });
   if (!response.ok) {
     const errorData = await response.json();
-    // Очікуємо, що помилка може бути масивом
     const message = Array.isArray(errorData.message)
       ? errorData.message.join(', ')
       : errorData.message;
@@ -35,7 +34,6 @@ export const createEmployee = async (
   return response.json();
 };
 
-// Функція для оновлення даних співробітника
 export const updateEmployee = async (
   id: number,
   employeeData: UpdateEmployeeDto,
@@ -55,7 +53,6 @@ export const updateEmployee = async (
   return response.json();
 };
 
-// Функція для видалення співробітника
 export const deleteEmployee = async (id: number): Promise<void> => {
   const response = await fetch(`${API_BASE_URL}/employees/${id}`, {
     method: 'DELETE',
