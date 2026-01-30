@@ -1,19 +1,21 @@
 
 import type { Employee } from '../types';
 
-const API_BASE_URL = '/api'; 
+// Твій новий "літаючий" бекенд на Google Cloud Run
+const API_BASE_URL = 'https://employers-backend-528727363440.us-central1.run.app'; 
 
 export type CreateEmployeeDto = Omit<Employee, 'id'>;
 export type UpdateEmployeeDto = Partial<CreateEmployeeDto>;
 
 export const getEmployees = async (search = ''): Promise<Employee[]> => {
+  // Додано обробку параметрів пошуку
   const response = await fetch(`${API_BASE_URL}/employees?search=${search}`);
   if (!response.ok) {
     throw new Error('Не вдалося завантажити список співробітників');
   }
-   { data: Employee[] }
   const result = await response.json();
-  return result.data || [];
+  // NestJS зазвичай повертає дані або напряму, або в об'єкті { data: [] }
+  return Array.isArray(result) ? result : result.data || [];
 };
 
 export const createEmployee = async (
