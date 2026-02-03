@@ -1,8 +1,9 @@
 [[redirects]]
   from = "/api/*"
-  to = "https://lumina-staff-suite-backend.onrender.com/:splat"
+  to = "https://employers-backend-528727363440.us-central1.run.app/:splat"
   status = 200
   force = true
+
 [[redirects]]
   from = "/*"
   to = "/index.html"
