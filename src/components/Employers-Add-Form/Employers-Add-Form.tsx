@@ -4,7 +4,6 @@ import type { UpdateEmployeeDto } from '../../features/employers/useEmployers';
 
 
 interface EmployeesAddFormProps {
-  UpdateEmployeeDto
   onSave: (employee: UpdateEmployeeDto) => void;
 }
 
