@@ -5,6 +5,7 @@
 ![Lumina Staff Suite Dashboard](./dashboard-preview.png)
 
 ✨ **Features**
+
 ✅ **Full CRUD Functionality:** A complete module for managing employees (Create, Read, Update, Delete) with modals, search, and real-time updates.
 
 📊 Reports & Export: A dedicated reports page with the ability to export all employee data to a .CSV file.
