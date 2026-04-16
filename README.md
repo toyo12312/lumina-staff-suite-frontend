@@ -33,7 +33,7 @@ Multi-Language Support (i18n): Fully internationalized interface supporting 6 la
 | **Utilities** | date-fns |
 | **API Client** | Axios |
 | **Icons** | React Icons |
-| **UI Components**| Custom modal, react-hot-toast, custom spinner |
+| **UI Components**|Custom modal, react-hot-toast, Skeleton Loading (Shimmer effect) |
 
 ## 🏁 Getting Started
 
