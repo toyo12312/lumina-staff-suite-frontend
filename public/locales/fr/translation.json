@@ -50,7 +50,9 @@
     "button_save": "Enregistrer",
     "button_cancel": "Annuler",
     "button_edit": "Modifier",
-    "button_delete": "Supprimer"
+    "button_delete": "Supprimer",
+    "delete_confirm_message": "Êtes-vous sûr de vouloir supprimer cet employé? Cette action ne peut pas être annulée.",
+    "no_employees_found": "Aucun employé trouvé."
   },
   "reports": {
     "title": "Rapports",
@@ -70,8 +72,5 @@
     "title": "Oups ! On dirait que tu t'es perdu.",
     "description": "La page que vous recherchez n'existe pas ou a été déplacée.",
     "button": "Retour à l'accueil"
-  },
-  "button_delete": "Supprimer",
-  "delete_confirm_message": "Êtes-vous sûr de vouloir supprimer cet employé? Cette action ne peut pas être annulée.",
-  "no_employees_found": "Aucun employé trouvé."
+  }
 }

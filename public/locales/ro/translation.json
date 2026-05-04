@@ -50,7 +50,9 @@
     "button_save": "Salvați",
     "button_cancel": "Anulați",
     "button_edit": "Editare",
-    "button_delete": "Ștergere"
+    "button_delete": "Ștergere",
+    "delete_confirm_message": "Ești sigur că vrei să ștergi acest angajat? Această acțiune nu poate fi anulată.",
+    "no_employees_found": "Nu au fost găsiți angajați."
   },
   "reports": {
     "title": "Rapoarte",
@@ -70,8 +72,5 @@
     "title": "Oops! Se pare că te-ai rătăcit.",
     "description": "Pagina pe care o căutați nu există sau a fost mutată.",
     "button": "Înapoi la pagina principală"
-  },
-  "button_delete": "Șterge",
-  "delete_confirm_message": "Ești sigur că vrei să ștergi acest angajat? Această acțiune nu poate fi anulată.",
-  "no_employees_found": "Nu au fost găsiți angajați."
+  }
 }

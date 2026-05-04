@@ -50,7 +50,9 @@
     "button_save": "Speichern",
     "button_cancel": "Abbrechen",
     "button_edit": "Bearbeiten",
-    "button_delete": "Löschen"
+    "button_delete": "Löschen",
+    "delete_confirm_message": "Sind Sie sicher, dass Sie diesen Mitarbeiter löschen möchten? Diese Aktion kann nicht rückgängig gemacht werden.",
+    "no_employees_found": "Keine Mitarbeiter gefunden."
   },
   "reports": {
     "title": "Berichte",
@@ -70,8 +72,5 @@
     "title": "Hoppla! Es sieht so aus, als hätten Sie sich verirrt.",
     "description": "Die von Ihnen gesuchte Seite existiert nicht oder wurde verschoben.",
     "button": "Zurück zur Hauptseite"
-  },
-  "button_delete": "Löschen",
-  "delete_confirm_message": "Sind Sie sicher, dass Sie diesen Mitarbeiter löschen möchten? Diese Aktion kann nicht rückgängig gemacht werden.",
-  "no_employees_found": "Keine Mitarbeiter gefunden."
+  }
 }
