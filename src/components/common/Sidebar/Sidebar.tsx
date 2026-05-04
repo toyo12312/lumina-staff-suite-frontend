@@ -2,6 +2,7 @@ import type { FC, Dispatch, SetStateAction } from 'react';
 import { NavLink } from 'react-router-dom';
 import { LayoutDashboard, Users, FileText, Settings, X } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
+import { Link } from 'react-router-dom';
 
 interface SidebarProps {
   isOpen: boolean;
@@ -9,16 +10,17 @@ interface SidebarProps {
 }
 
 const Logo = () => (
-  <div className="flex items-center gap-3 px-4 mb-8">
-    <div className="w-8 h-8 rounded-full flex items-center justify-center bg-slate-800 dark:bg-white">
-      <span className="font-bold text-lg text-white dark:text-slate-800">
-        B
-      </span>
+  <Link
+    to="/"
+    className="flex items-center gap-3 px-4 mb-8 hover:opacity-80 transition-opacity cursor-pointer w-fit"
+  >
+    <div className="w-8 h-8 rounded-full flex items-center justify-center bg-blue-600 dark:bg-blue-500 shadow-md">
+      <span className="font-bold text-lg text-white">L</span>
     </div>
     <span className="text-2xl font-bold tracking-wider text-slate-800 dark:text-white">
       LUMINA
     </span>
-  </div>
+  </Link>
 );
 
 const Sidebar: FC<SidebarProps> = ({ isOpen, setOpen }) => {

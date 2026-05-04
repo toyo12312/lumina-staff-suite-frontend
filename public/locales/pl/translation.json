@@ -65,5 +65,13 @@
     "theme_description": "Wybierz jasny lub ciemny motyw dla wygodnej pracy.",
     "language_interface": "Język interfejsu",
     "language_description": "Wybierz język, w którym będzie wyświetlana aplikacja."
-  }
+  },
+  "notFound": {
+    "title": "Ups! Wygląda na to, że się zgubiłeś.",
+    "description": "Strona, którą szukasz, nie istnieje lub została przeniesiona.",
+    "button": "Powrót do strony głównej"
+  },
+  "button_delete": "Usuń",
+  "delete_confirm_message": "Czy na pewno chcesz usunąć tego pracownika? tej czynności nie można cofnąć.",
+  "no_employees_found": "Nie znaleziono pracowników."
 }

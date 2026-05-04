@@ -2,11 +2,9 @@ import { useState, type FC, type ChangeEvent, type FormEvent } from 'react';
 import { useTranslation } from 'react-i18next';
 import type { UpdateEmployeeDto } from '../../features/employers/useEmployers';
 
-
 interface EmployeesAddFormProps {
   onSave: (employee: UpdateEmployeeDto) => void;
 }
-
 
 const initialState: UpdateEmployeeDto = {
   firstName: '',
@@ -24,7 +22,6 @@ const EmployeesAddForm: FC<EmployeesAddFormProps> = ({ onSave }) => {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     onSave(formData);
@@ -40,7 +37,6 @@ const EmployeesAddForm: FC<EmployeesAddFormProps> = ({ onSave }) => {
         {t('employees.add_form_title')}
       </h2>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-        {/* Поле для імені */}
         <div>
           <label
             htmlFor="firstName"
@@ -77,7 +73,6 @@ const EmployeesAddForm: FC<EmployeesAddFormProps> = ({ onSave }) => {
             required
           />
         </div>
-        {/* Поле для Email */}
         <div className="md:col-span-2">
           <label
             htmlFor="email"
@@ -96,7 +91,6 @@ const EmployeesAddForm: FC<EmployeesAddFormProps> = ({ onSave }) => {
             required
           />
         </div>
-        {/* Поле для посади */}
         <div className="md:col-span-2">
           <label
             htmlFor="position"

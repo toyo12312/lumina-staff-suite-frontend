@@ -16,8 +16,14 @@ export const useEmployees = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [searchTerm, setSearchTerm] = useState('');
+
   const [isModalOpen, setModalOpen] = useState(false);
   const [editingEmployee, setEditingEmployee] = useState<Employee | null>(null);
+
+  const [isDeleteModalOpen, setDeleteModalOpen] = useState(false);
+  const [deletingEmployeeId, setDeletingEmployeeId] = useState<number | null>(
+    null,
+  );
 
   const fetchAndSetEmployees = useCallback(async (query: string) => {
     try {
@@ -64,15 +70,27 @@ export const useEmployees = () => {
     }
   };
 
-  const handleDelete = async (employeeId: number) => {
-    if (window.prompt("Введіть 'видалити' для підтвердження:") === 'видалити') {
+  const requestDelete = (employeeId: number) => {
+    setDeletingEmployeeId(employeeId);
+    setDeleteModalOpen(true);
+  };
+
+  const confirmDelete = async () => {
+    if (deletingEmployeeId !== null) {
       try {
-        await deleteEmployee(employeeId);
+        await deleteEmployee(deletingEmployeeId);
         await fetchAndSetEmployees(searchTerm);
+        setDeleteModalOpen(false);
+        setDeletingEmployeeId(null);
       } catch (err: any) {
         setError(err.message);
       }
     }
+  };
+
+  const cancelDelete = () => {
+    setDeleteModalOpen(false);
+    setDeletingEmployeeId(null);
   };
 
   const openEditModal = (employee: Employee) => {
@@ -98,9 +116,12 @@ export const useEmployees = () => {
     isModalOpen,
     editingEmployee,
     handleSave,
-    handleDelete,
     openEditModal,
     openAddModal,
     closeModal,
+    isDeleteModalOpen,
+    requestDelete,
+    confirmDelete,
+    cancelDelete,
   };
 };

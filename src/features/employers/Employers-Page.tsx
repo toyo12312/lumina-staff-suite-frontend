@@ -6,8 +6,11 @@ import { EmployeeRow } from './components/EmployeeRow';
 import { EmployeeModal } from './components/EmployeeModal';
 import { TableSkeleton } from '../../components/common/TableSkeleton/TableSkeleton';
 
+import { ConfirmDeleteModal } from './components/ConfirmDeleteModal';
+
 const EmployeesPage = () => {
   const { t } = useTranslation();
+
   const {
     employees,
     isLoading,
@@ -17,10 +20,13 @@ const EmployeesPage = () => {
     isModalOpen,
     editingEmployee,
     handleSave,
-    handleDelete,
     openEditModal,
     openAddModal,
     closeModal,
+    isDeleteModalOpen,
+    requestDelete,
+    confirmDelete,
+    cancelDelete,
   } = useEmployees();
 
   return (
@@ -47,6 +53,7 @@ const EmployeesPage = () => {
             {t('employees.add_employee')}
           </button>
         </div>
+
         <div className="mb-4 bg-white dark:bg-gray-800 p-4 rounded-lg shadow-sm">
           <div className="relative">
             <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
@@ -55,12 +62,13 @@ const EmployeesPage = () => {
             <input
               type="text"
               placeholder={t('employees.search_placeholder')}
-              className="w-full p-2 pl-10 bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-blue-500 focus:border-blue-500"
+              className="w-full p-2 pl-10 bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-blue-500 focus:border-blue-500 text-gray-900 dark:text-white"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
             />
           </div>
         </div>
+
         <div className="bg-white dark:bg-gray-800 shadow-md rounded-lg overflow-x-auto min-h-[300px]">
           {isLoading ? (
             <TableSkeleton />
@@ -94,13 +102,16 @@ const EmployeesPage = () => {
                       key={employee.id}
                       employee={employee}
                       onEdit={openEditModal}
-                      onDelete={handleDelete}
+                      onDelete={() => requestDelete(Number(employee.id))}
                     />
                   ))
                 ) : (
                   <tr>
                     <td colSpan={5} className="text-center p-6">
-                      {t('employees.no_employees_found')}
+                      {t(
+                        'employees.no_employees_found',
+                        'Співробітників не знайдено',
+                      )}
                     </td>
                   </tr>
                 )}
@@ -108,11 +119,19 @@ const EmployeesPage = () => {
             </table>
           )}
         </div>
+
         {isModalOpen && (
           <EmployeeModal
             employee={editingEmployee}
             onClose={closeModal}
             onSave={handleSave}
+          />
+        )}
+
+        {isDeleteModalOpen && (
+          <ConfirmDeleteModal
+            onConfirm={confirmDelete}
+            onCancel={cancelDelete}
           />
         )}
       </div>

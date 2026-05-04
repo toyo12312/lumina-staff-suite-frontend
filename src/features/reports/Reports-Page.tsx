@@ -52,12 +52,13 @@ const ReportsPage = () => {
   const handleExport = () => {
     const dataToExport = reportData.map((emp) => ({
       ID: emp.id,
-      "Ім'я": emp.firstName,
-      Прізвище: emp.lastName,
-      Посада: emp.position,
-      Email: emp.email,
-      Статус: emp.status,
-      'Дата найму': new Date(emp.hireDate).toLocaleDateString(),
+      [t('employees.table_header_name')]: `${emp.firstName} ${emp.lastName}`,
+      [t('employees.table_header_position')]: emp.position,
+      [t('employees.table_header_email')]: emp.email,
+      [t('employees.table_header_status')]: t(`employees.status.${emp.status}`),
+      [t('reports.table_header_hire_date')]: new Date(
+        emp.hireDate,
+      ).toLocaleDateString(),
     }));
 
     exportToCsv('employees_report.csv', dataToExport);

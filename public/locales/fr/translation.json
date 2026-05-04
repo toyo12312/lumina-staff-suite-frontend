@@ -65,5 +65,13 @@
     "theme_description": "Choisissez un thème clair ou sombre pour un travail confortable.",
     "language_interface": "Langue de l'interface",
     "language_description": "Choisissez la langue dans laquelle l'application sera affichée."
-  }
+  },
+  "notFound": {
+    "title": "Oups ! On dirait que tu t'es perdu.",
+    "description": "La page que vous recherchez n'existe pas ou a été déplacée.",
+    "button": "Retour à l'accueil"
+  },
+  "button_delete": "Supprimer",
+  "delete_confirm_message": "Êtes-vous sûr de vouloir supprimer cet employé? Cette action ne peut pas être annulée.",
+  "no_employees_found": "Aucun employé trouvé."
 }
