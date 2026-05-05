@@ -72,5 +72,16 @@
     "title": "Ups! Wygląda na to, że się zgubiłeś.",
     "description": "Strona, którą szukasz, nie istnieje lub została przeniesiona.",
     "button": "Powrót do strony głównej"
+  },
+  "commandPalette": {
+    "placeholder": "Szukaj poleceń...",
+    "empty": "Nie znaleziono wyników.",
+    "navigation_group": "Nawigacja",
+    "go_to_dashboard": "Przejdź do panelu głównego",
+    "go_to_employees": "Przejdź do listy pracowników",
+    "go_to_reports": "Przejdź do raportów",
+    "go_to_settings": "Przejdź do ustawień",
+    "actions_group": "Akcje",
+    "toggle_theme": "Przełącz motyw (Jasny/Ciemny)"
   }
 }

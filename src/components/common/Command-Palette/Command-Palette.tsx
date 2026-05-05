@@ -1,7 +1,7 @@
 import { useEffect, type FC } from 'react';
 import { createPortal } from 'react-dom';
 import { Command } from 'cmdk';
-import { LayoutDashboard, Users, FileText, Settings, Sun } from 'lucide-react';
+import { LayoutDashboard, Sun } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
@@ -36,65 +36,70 @@ export const CommandPalette: FC<CommandPaletteProps> = ({
     command();
   };
 
-  if (!isOpen) {
-    return null;
-  }
+  if (!isOpen) return null;
 
   return createPortal(
     <div
-      className="fixed inset-0 bg-black/50 flex items-start justify-center pt-16 z-50"
+      className="fixed inset-0 bg-black/40 backdrop-blur-sm flex items-start justify-center pt-[15vh] z-[9999]"
       onClick={() => setOpen(false)}
     >
       <Command.Dialog
         open={isOpen}
         onOpenChange={setOpen}
         label="Global Command Menu"
-        className="bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 rounded-lg shadow-2xl w-full max-w-lg"
+        className="bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 rounded-xl shadow-2xl w-full max-w-lg border border-gray-200 dark:border-gray-800 overflow-hidden"
         onClick={(e) => e.stopPropagation()}
       >
-        <Command.Input
-          placeholder={t('commandPalette.placeholder')}
-          className="w-full p-3 bg-transparent border-b border-gray-200 dark:border-gray-700 focus:outline-none"
-        />
-        <Command.List className="p-2 max-h-[300px] overflow-y-auto">
-          <Command.Empty>{t('commandPalette.empty')}</Command.Empty>
-          <Command.Group heading={t('commandPalette.navigation_group')}>
+        <div className="flex items-center border-b border-gray-200 dark:border-gray-800 px-4">
+          <Command.Input
+            placeholder={t('commandPalette.placeholder')}
+            className="w-full py-4 bg-transparent focus:outline-none text-sm"
+          />
+          <kbd className="hidden sm:inline-block px-2 py-1 text-xs font-semibold text-gray-500 bg-gray-100 dark:bg-gray-800 rounded border border-gray-300 dark:border-gray-700">
+            ESC
+          </kbd>
+        </div>
+
+        <Command.List className="p-2 max-h-[400px] overflow-y-auto overflow-x-hidden">
+          <Command.Empty className="py-6 text-center text-sm text-gray-500">
+            {t('commandPalette.empty')}
+          </Command.Empty>
+
+          <Command.Group
+            heading={
+              <span className="px-2 text-xs font-medium text-gray-500 uppercase tracking-wider">
+                {t('commandPalette.navigation_group')}
+              </span>
+            }
+          >
             <Command.Item
               onSelect={() => runCommand(() => navigate('/dashboard'))}
-              className="flex items-center gap-3 p-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer"
+              className="flex items-center gap-3 p-3 rounded-lg hover:bg-blue-50 dark:hover:bg-blue-900/20 cursor-pointer aria-selected:bg-blue-50 dark:aria-selected:bg-blue-900/20 transition-colors"
             >
-              <LayoutDashboard size={16} />
-              <span>{t('commandPalette.go_to_dashboard')}</span>
-            </Command.Item>
-            <Command.Item
-              onSelect={() => runCommand(() => navigate('/employees'))}
-              className="flex items-center gap-3 p-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer"
-            >
-              <Users size={16} />
-              <span>{t('commandPalette.go_to_employees')}</span>
-            </Command.Item>
-            <Command.Item
-              onSelect={() => runCommand(() => navigate('/reports'))}
-              className="flex items-center gap-3 p-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer"
-            >
-              <FileText size={16} />
-              <span>{t('commandPalette.go_to_reports')}</span>
-            </Command.Item>
-            <Command.Item
-              onSelect={() => runCommand(() => navigate('/settings'))}
-              className="flex items-center gap-3 p-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer"
-            >
-              <Settings size={16} />
-              <span>{t('commandPalette.go_to_settings')}</span>
+              <LayoutDashboard size={18} className="text-blue-500" />
+              <span className="text-sm font-medium">
+                {t('commandPalette.go_to_dashboard')}
+              </span>
             </Command.Item>
           </Command.Group>
-          <Command.Group heading={t('commandPalette.actions_group')}>
+
+          <div className="h-px bg-gray-200 dark:bg-gray-800 my-2" />
+
+          <Command.Group
+            heading={
+              <span className="px-2 text-xs font-medium text-gray-500 uppercase tracking-wider">
+                {t('commandPalette.actions_group')}
+              </span>
+            }
+          >
             <Command.Item
               onSelect={() => runCommand(toggleTheme)}
-              className="flex items-center gap-3 p-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer"
+              className="flex items-center gap-3 p-3 rounded-lg hover:bg-orange-50 dark:hover:bg-orange-900/20 cursor-pointer aria-selected:bg-orange-50 dark:aria-selected:bg-orange-900/20 transition-colors"
             >
-              <Sun size={16} />
-              <span>{t('commandPalette.toggle_theme')}</span>
+              <Sun size={18} className="text-orange-500" />
+              <span className="text-sm font-medium">
+                {t('commandPalette.toggle_theme')}
+              </span>
             </Command.Item>
           </Command.Group>
         </Command.List>

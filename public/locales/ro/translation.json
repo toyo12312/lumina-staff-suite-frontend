@@ -72,5 +72,16 @@
     "title": "Oops! Se pare că te-ai rătăcit.",
     "description": "Pagina pe care o căutați nu există sau a fost mutată.",
     "button": "Înapoi la pagina principală"
+  },
+  "commandPalette": {
+    "placeholder": "Tastați o comandă sau căutați...",
+    "empty": "Niciun rezultat găsit.",
+    "navigation_group": "Navigare",
+    "go_to_dashboard": "Mergi la panoul de control",
+    "go_to_employees": "Mergi la lista angajaților",
+    "go_to_reports": "Mergi la rapoarte",
+    "go_to_settings": "Mergi la setări",
+    "actions_group": "Acțiuni",
+    "toggle_theme": "Schimbă tema (Luminată/Obscură)"
   }
 }

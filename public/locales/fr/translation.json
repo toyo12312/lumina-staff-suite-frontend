@@ -72,5 +72,16 @@
     "title": "Oups ! On dirait que tu t'es perdu.",
     "description": "La page que vous recherchez n'existe pas ou a été déplacée.",
     "button": "Retour à l'accueil"
+  },
+  "commandPalette": {
+    "placeholder": "Tapez une commande ou recherchez...",
+    "empty": "Aucun résultat trouvé.",
+    "navigation_group": "Navigation",
+    "go_to_dashboard": "Aller au tableau de bord",
+    "go_to_employees": "Aller à la liste des employés",
+    "go_to_reports": "Aller aux rapports",
+    "go_to_settings": "Aller aux paramètres",
+    "actions_group": "Actions",
+    "toggle_theme": "Changer de thème (Clair/Sombre)"
   }
 }

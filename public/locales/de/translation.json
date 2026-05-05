@@ -72,5 +72,16 @@
     "title": "Hoppla! Es sieht so aus, als hätten Sie sich verirrt.",
     "description": "Die von Ihnen gesuchte Seite existiert nicht oder wurde verschoben.",
     "button": "Zurück zur Hauptseite"
+  },
+  "commandPalette": {
+    "placeholder": "Geben Sie einen Befehl ein oder suchen Sie...",
+    "empty": "Keine Ergebnisse gefunden.",
+    "navigation_group": "Navigation",
+    "go_to_dashboard": "Zum Dashboard gehen",
+    "go_to_employees": "Zur Mitarbeiterliste gehen",
+    "go_to_reports": "Zu den Berichten gehen",
+    "go_to_settings": "Zu den Einstellungen gehen",
+    "actions_group": "Aktionen",
+    "toggle_theme": "Thema umschalten (Hell/Dunkel)"
   }
 }

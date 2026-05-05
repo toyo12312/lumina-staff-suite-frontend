@@ -72,5 +72,16 @@
     "title": "Oops! Looks like you're lost.",
     "description": "The page you are looking for does not exist or has been moved.",
     "button": "Return to Home"
+  },
+  "commandPalette": {
+    "placeholder": "Type a command or search...",
+    "empty": "No results found.",
+    "navigation_group": "Navigation",
+    "go_to_dashboard": "Go to Dashboard",
+    "go_to_employees": "Go to Employees",
+    "go_to_reports": "Go to Reports",
+    "go_to_settings": "Go to Settings",
+    "actions_group": "Actions",
+    "toggle_theme": "Toggle Theme (Light/Dark)"
   }
 }
