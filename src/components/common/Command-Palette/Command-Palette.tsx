@@ -1,109 +1,81 @@
-import { useEffect, type FC } from 'react';
+import React, { useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
-import { Command } from 'cmdk';
-import { LayoutDashboard, Sun } from 'lucide-react';
-import { useNavigate } from 'react-router-dom';
-import { useTranslation } from 'react-i18next';
+import { useCommandActions } from './useCommandActions'; // Імпортуємо наш хук
 
 interface CommandPaletteProps {
   isOpen: boolean;
-  setOpen: (isOpen: boolean) => void;
+  setOpen: React.Dispatch<React.SetStateAction<boolean>>;
   toggleTheme: () => void;
 }
 
-export const CommandPalette: FC<CommandPaletteProps> = ({
+export const CommandPalette: React.FC<CommandPaletteProps> = ({
   isOpen,
   setOpen,
   toggleTheme,
 }) => {
-  const navigate = useNavigate();
-  const { t } = useTranslation();
+  const actions = useCommandActions(setOpen, toggleTheme);
+
+  const [selectedIndex, setSelectedIndex] = useState(0);
 
   useEffect(() => {
-    const down = (e: KeyboardEvent) => {
-      if (e.code === 'KeyK' && (e.metaKey || e.ctrlKey)) {
-        e.preventDefault();
-        setOpen(!isOpen);
-      }
+    if (isOpen) {
+      document.body.style.overflow = 'hidden';
+      setSelectedIndex(0);
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+    return () => {
+      document.body.style.overflow = 'unset';
     };
-
-    document.addEventListener('keydown', down);
-    return () => document.removeEventListener('keydown', down);
-  }, [isOpen, setOpen]);
-
-  const runCommand = (command: () => void) => {
-    setOpen(false);
-    command();
-  };
+  }, [isOpen]);
 
   if (!isOpen) return null;
 
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'ArrowDown') {
+      e.preventDefault();
+      setSelectedIndex((prev) => (prev + 1) % actions.length);
+    } else if (e.key === 'ArrowUp') {
+      e.preventDefault();
+      setSelectedIndex((prev) => (prev - 1 + actions.length) % actions.length);
+    } else if (e.key === 'Enter') {
+      e.preventDefault();
+      actions[selectedIndex].action();
+    }
+  };
+
   return createPortal(
     <div
-      className="fixed inset-0 bg-black/40 backdrop-blur-sm flex items-start justify-center pt-[15vh] z-[9999]"
+      className="fixed inset-0 z-[9999] flex items-start justify-center pt-[20vh]"
       onClick={() => setOpen(false)}
     >
-      <Command.Dialog
-        open={isOpen}
-        onOpenChange={setOpen}
-        label="Global Command Menu"
-        className="bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 rounded-xl shadow-2xl w-full max-w-lg border border-gray-200 dark:border-gray-800 overflow-hidden"
+      <div className="absolute inset-0 bg-slate-900/50 backdrop-blur-sm transition-opacity" />
+
+      <div
+        className="relative w-full max-w-2xl bg-white dark:bg-slate-800 rounded-xl shadow-2xl border border-slate-200 dark:border-slate-700 overflow-hidden"
         onClick={(e) => e.stopPropagation()}
       >
-        <div className="flex items-center border-b border-gray-200 dark:border-gray-800 px-4">
-          <Command.Input
-            placeholder={t('commandPalette.placeholder')}
-            className="w-full py-4 bg-transparent focus:outline-none text-sm"
-          />
-          <kbd className="hidden sm:inline-block px-2 py-1 text-xs font-semibold text-gray-500 bg-gray-100 dark:bg-gray-800 rounded border border-gray-300 dark:border-gray-700">
-            ESC
-          </kbd>
+        <div className="max-h-96 overflow-y-auto p-2">
+          {actions.map((item, index) => {
+            const isSelected = index === selectedIndex;
+            return (
+              <button
+                key={item.id}
+                onClick={item.action}
+                onMouseEnter={() => setSelectedIndex(index)}
+                className={`w-full text-left flex items-center px-3 py-2 mt-1 rounded-md transition-colors ${
+                  isSelected
+                    ? 'bg-indigo-100 dark:bg-indigo-500/20 text-indigo-700 dark:text-indigo-300'
+                    : 'text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800/50'
+                }`}
+              >
+                <span className="mr-3">{item.icon}</span>
+                {item.name}
+              </button>
+            );
+          })}
         </div>
-
-        <Command.List className="p-2 max-h-[400px] overflow-y-auto overflow-x-hidden">
-          <Command.Empty className="py-6 text-center text-sm text-gray-500">
-            {t('commandPalette.empty')}
-          </Command.Empty>
-
-          <Command.Group
-            heading={
-              <span className="px-2 text-xs font-medium text-gray-500 uppercase tracking-wider">
-                {t('commandPalette.navigation_group')}
-              </span>
-            }
-          >
-            <Command.Item
-              onSelect={() => runCommand(() => navigate('/dashboard'))}
-              className="flex items-center gap-3 p-3 rounded-lg hover:bg-blue-50 dark:hover:bg-blue-900/20 cursor-pointer aria-selected:bg-blue-50 dark:aria-selected:bg-blue-900/20 transition-colors"
-            >
-              <LayoutDashboard size={18} className="text-blue-500" />
-              <span className="text-sm font-medium">
-                {t('commandPalette.go_to_dashboard')}
-              </span>
-            </Command.Item>
-          </Command.Group>
-
-          <div className="h-px bg-gray-200 dark:bg-gray-800 my-2" />
-
-          <Command.Group
-            heading={
-              <span className="px-2 text-xs font-medium text-gray-500 uppercase tracking-wider">
-                {t('commandPalette.actions_group')}
-              </span>
-            }
-          >
-            <Command.Item
-              onSelect={() => runCommand(toggleTheme)}
-              className="flex items-center gap-3 p-3 rounded-lg hover:bg-orange-50 dark:hover:bg-orange-900/20 cursor-pointer aria-selected:bg-orange-50 dark:aria-selected:bg-orange-900/20 transition-colors"
-            >
-              <Sun size={18} className="text-orange-500" />
-              <span className="text-sm font-medium">
-                {t('commandPalette.toggle_theme')}
-              </span>
-            </Command.Item>
-          </Command.Group>
-        </Command.List>
-      </Command.Dialog>
+      </div>
     </div>,
     document.body,
   );
