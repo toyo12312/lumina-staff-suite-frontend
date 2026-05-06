@@ -14,7 +14,6 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
   toggleTheme,
 }) => {
   const actions = useCommandActions(setOpen, toggleTheme);
-
   const [selectedIndex, setSelectedIndex] = useState(0);
 
   useEffect(() => {
@@ -29,22 +28,35 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
     };
   }, [isOpen]);
 
+  useEffect(() => {
+    if (!isOpen) return;
+
+    const handleGlobalKeyDown = (e: KeyboardEvent) => {
+      if (!actions || actions.length === 0) return;
+
+      if (e.key === 'ArrowDown') {
+        e.preventDefault();
+        setSelectedIndex((prev) => (prev + 1) % actions.length);
+      } else if (e.key === 'ArrowUp') {
+        e.preventDefault();
+        setSelectedIndex(
+          (prev) => (prev - 1 + actions.length) % actions.length,
+        );
+      } else if (e.key === 'Enter') {
+        e.preventDefault();
+        actions[selectedIndex].action();
+      } else if (e.key === 'Escape') {
+        e.preventDefault();
+        setOpen(false);
+      }
+    };
+
+    document.addEventListener('keydown', handleGlobalKeyDown);
+
+    return () => document.removeEventListener('keydown', handleGlobalKeyDown);
+  }, [isOpen, actions, selectedIndex, setOpen]);
+
   if (!isOpen) return null;
-
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
-    if (!actions || actions.length === 0) return;
-
-    if (e.key === 'ArrowDown') {
-      e.preventDefault();
-      setSelectedIndex((prev) => (prev + 1) % actions.length);
-    } else if (e.key === 'ArrowUp') {
-      e.preventDefault();
-      setSelectedIndex((prev) => (prev - 1 + actions.length) % actions.length);
-    } else if (e.key === 'Enter') {
-      e.preventDefault();
-      actions[selectedIndex].action();
-    }
-  };
 
   return createPortal(
     <div
@@ -56,9 +68,6 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
       <div
         className="relative w-full max-w-2xl bg-white dark:bg-slate-800 rounded-xl shadow-2xl border border-slate-200 dark:border-slate-700 overflow-hidden"
         onClick={(e) => e.stopPropagation()}
-        onKeyDown={handleKeyDown}
-        tabIndex={0}
-        autoFocus
       >
         <div className="max-h-96 overflow-y-auto p-2">
           {actions.map((item, index) => {
