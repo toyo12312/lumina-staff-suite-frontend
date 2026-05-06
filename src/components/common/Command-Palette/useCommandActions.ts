@@ -16,7 +16,8 @@ export const useCommandActions = (
   const actions = [
     {
       id: 'theme',
-      name: t('command.switchTheme', 'Switch Theme (Dark/Light)'),
+      // Виправили на commandPalette.toggle_theme
+      name: t('commandPalette.toggle_theme', 'Switch Theme (Dark/Light)'),
       icon: '🌗',
       action: () => {
         toggleTheme();
@@ -25,28 +26,32 @@ export const useCommandActions = (
     },
     {
       id: 'dashboard',
-      name: t('nav.dashboard', 'Dashboard'),
+      // Виправили nav на sidebar
+      name: t('sidebar.dashboard', 'Dashboard'),
       path: '/dashboard',
       icon: '📊',
       action: () => handleNavigate('/dashboard'),
     },
     {
       id: 'employees',
-      name: t('nav.employees', 'Employees'),
+      // Виправили nav на sidebar
+      name: t('sidebar.employees', 'Employees'),
       path: '/employees',
       icon: '👥',
       action: () => handleNavigate('/employees'),
     },
     {
       id: 'reports',
-      name: t('nav.reports', 'Reports'),
+      // Виправили nav на sidebar
+      name: t('sidebar.reports', 'Reports'),
       path: '/reports',
       icon: '📁',
       action: () => handleNavigate('/reports'),
     },
     {
       id: 'settings',
-      name: t('nav.settings', 'Settings'),
+      // Виправили nav на sidebar
+      name: t('sidebar.settings', 'Settings'),
       path: '/settings',
       icon: '⚙️',
       action: () => handleNavigate('/settings'),
