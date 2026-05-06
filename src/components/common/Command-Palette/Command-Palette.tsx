@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
-import { useCommandActions } from './useCommandActions'; // Імпортуємо наш хук
+import { useCommandActions } from './useCommandActions';
 
 interface CommandPaletteProps {
   isOpen: boolean;
@@ -31,7 +31,9 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
 
   if (!isOpen) return null;
 
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
+    if (!actions || actions.length === 0) return;
+
     if (e.key === 'ArrowDown') {
       e.preventDefault();
       setSelectedIndex((prev) => (prev + 1) % actions.length);
@@ -54,6 +56,9 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
       <div
         className="relative w-full max-w-2xl bg-white dark:bg-slate-800 rounded-xl shadow-2xl border border-slate-200 dark:border-slate-700 overflow-hidden"
         onClick={(e) => e.stopPropagation()}
+        onKeyDown={handleKeyDown}
+        tabIndex={0}
+        autoFocus
       >
         <div className="max-h-96 overflow-y-auto p-2">
           {actions.map((item, index) => {
