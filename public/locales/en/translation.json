@@ -58,7 +58,8 @@
     "title": "Reports",
     "subtitle": "View and export employee data.",
     "export_csv": "Export to CSV",
-    "table_header_hire_date": "Hire Date"
+    "table_header_hire_date": "Hire Date",
+    "reports.no_data": "There is no data to display. Please add employees to view reports."
   },
   "settings": {
     "title": "Settings",

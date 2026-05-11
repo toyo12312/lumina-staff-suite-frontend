@@ -55,6 +55,7 @@
     "no_employees_found": "Nie znaleziono pracowników."
   },
   "reports": {
+    "reports.no_data": "Brak danych do wyświetlenia. Proszę dodać pracowników, aby zobaczyć raporty.",
     "title": "Raporty",
     "subtitle": "Przeglądaj i eksportuj dane pracowników.",
     "export_csv": "Eksportuj do CSV",

@@ -55,6 +55,7 @@
     "no_employees_found": "Nu au fost găsiți angajați."
   },
   "reports": {
+    "reports.no_data": "Nu există date de afișat. Vă rugăm să adăugați angajați pentru a vedea rapoartele.",
     "title": "Rapoarte",
     "subtitle": "Vizualizați și exportați datele angajaților.",
     "export_csv": "Export în CSV",
