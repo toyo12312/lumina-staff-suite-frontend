@@ -22,7 +22,8 @@
     "active": "Activi",
     "on_leave": "În concediu",
     "terminated": "Disponibilizați",
-    "status_distribution": "Distribuție după statut"
+    "status_distribution": "Distribuție după statut",
+    "no_chart_data": "Nu există date de afișat. Vă rugăm să adăugați angajați pentru a vedea graficele."
   },
   "employees": {
     "title": "Lista angajaților",
@@ -56,6 +57,7 @@
   },
   "reports": {
     "no_data": "Nu există date de afișat. Vă rugăm să adăugați angajați pentru a vedea rapoartele.",
+    "no_chart_data": "Nu există date de afișat. Vă rugăm să adăugați angajați pentru a vedea graficele.",
     "title": "Rapoarte",
     "subtitle": "Vizualizați și exportați datele angajaților.",
     "export_csv": "Export în CSV",

@@ -22,7 +22,8 @@
     "active": "Active",
     "on_leave": "On Leave",
     "terminated": "Terminated",
-    "status_distribution": "Status Distribution"
+    "status_distribution": "Status Distribution",
+    "no_chart_data": "There is no data to display. Please add employees to see the charts."
   },
   "employees": {
     "title": "Employees List",

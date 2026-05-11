@@ -22,7 +22,8 @@
     "active": "Actifs",
     "on_leave": "En congé",
     "terminated": "Licenciés",
-    "status_distribution": "Répartition par statut"
+    "status_distribution": "Répartition par statut",
+    "no_chart_data": "Il n'y a pas de données à afficher. Veuillez ajouter des employés pour voir les graphiques."
   },
   "employees": {
     "title": "Liste des employés",

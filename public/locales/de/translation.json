@@ -22,7 +22,8 @@
     "active": "Aktiv",
     "on_leave": "Beurlaubt",
     "terminated": "Gekündigt",
-    "status_distribution": "Statusverteilung"
+    "status_distribution": "Statusverteilung",
+    "no_chart_data": "Es sind keine Daten zum Anzeigen vorhanden. Bitte fügen Sie Mitarbeiter hinzu, um die Diagramme zu sehen."
   },
   "employees": {
     "title": "Mitarbeiterliste",

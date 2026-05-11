@@ -22,7 +22,8 @@
     "active": "Aktywni",
     "on_leave": "Na urlopie",
     "terminated": "Zwolnieni",
-    "status_distribution": "Rozkład według statusu"
+    "status_distribution": "Rozkład według statusu",
+    "no_chart_data": "Brak danych do wyświetlenia. Proszę dodać pracowników, aby zobaczyć wykresy."
   },
   "employees": {
     "title": "Lista pracowników",
