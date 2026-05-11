@@ -59,7 +59,7 @@
     "subtitle": "Affichez et exportez les données des employés.",
     "export_csv": "Exporter en CSV",
     "table_header_hire_date": "Date d'embauche",
-    "reports.no_data": "Il n'y a pas de données à afficher. Veuillez ajouter des employés pour voir les rapports."
+    "no_data": "Il n'y a pas de données à afficher. Veuillez ajouter des employés pour voir les rapports."
   },
   "settings": {
     "title": "Paramètres",

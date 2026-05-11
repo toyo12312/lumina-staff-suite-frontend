@@ -59,7 +59,7 @@
     "subtitle": "Mitarbeiterdaten anzeigen und exportieren.",
     "export_csv": "Als CSV exportieren",
     "table_header_hire_date": "Einstellungsdatum",
-    "reports.no_data": "Es sind keine Daten zum Anzeigen vorhanden. Bitte fügen Sie Mitarbeiter hinzu, um Berichte zu sehen."
+    "no_data": "Es sind keine Daten zum Anzeigen vorhanden. Bitte fügen Sie Mitarbeiter hinzu, um Berichte zu sehen."
   },
   "settings": {
     "title": "Einstellungen",
