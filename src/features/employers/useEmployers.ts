@@ -17,6 +17,11 @@ export const useEmployees = () => {
   const [error, setError] = useState<string | null>(null);
   const [searchTerm, setSearchTerm] = useState('');
 
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+  const [totalCount, setTotalCount] = useState(0);
+  const limit = 10;
+
   const [isModalOpen, setModalOpen] = useState(false);
   const [editingEmployee, setEditingEmployee] = useState<Employee | null>(null);
 
@@ -25,33 +30,45 @@ export const useEmployees = () => {
     null,
   );
 
-  const fetchAndSetEmployees = useCallback(async (query: string) => {
-    try {
-      setIsLoading(true);
-      const data = await getEmployees(query);
-      setEmployees(data);
-      setError(null);
-    } catch (err: any) {
-      if (err.name !== 'AbortError') {
-        setError(err.message);
+  const fetchAndSetEmployees = useCallback(
+    async (query: string, page: number) => {
+      try {
+        setIsLoading(true);
+        const response = await getEmployees(query, page, limit);
+        setEmployees(response.data);
+        setTotalCount(response.total);
+        setTotalPages(response.lastPage);
+        setCurrentPage(response.page);
+        setError(null);
+      } catch (err: any) {
+        if (err.name !== 'AbortError') {
+          setError(err.message);
+        }
+      } finally {
+        setIsLoading(false);
       }
-    } finally {
-      setIsLoading(false);
-    }
-  }, []);
+    },
+    [],
+  );
 
   useEffect(() => {
     const delayDebounceFn = setTimeout(() => {
-      fetchAndSetEmployees(searchTerm);
+      fetchAndSetEmployees(searchTerm, currentPage);
     }, 500);
 
     return () => clearTimeout(delayDebounceFn);
-  }, [searchTerm, fetchAndSetEmployees]);
+  }, [searchTerm, currentPage, fetchAndSetEmployees]);
+
+  const handleSearchTermChange = (term: string) => {
+    setSearchTerm(term);
+    setCurrentPage(1);
+  };
 
   const handleSave = async (employeeData: UpdateEmployeeDto) => {
     try {
       if (editingEmployee) {
         await updateEmployee(Number(editingEmployee.id), employeeData);
+        await fetchAndSetEmployees(searchTerm, currentPage);
       } else {
         const newEmployeeData: CreateEmployeeDto = {
           firstName: employeeData.firstName || '',
@@ -62,8 +79,9 @@ export const useEmployees = () => {
           hireDate: new Date().toISOString(),
         };
         await createEmployee(newEmployeeData);
+        setCurrentPage(1);
+        await fetchAndSetEmployees(searchTerm, 1);
       }
-      await fetchAndSetEmployees(searchTerm);
       setModalOpen(false);
     } catch (err: any) {
       setError(err.message);
@@ -79,7 +97,7 @@ export const useEmployees = () => {
     if (deletingEmployeeId !== null) {
       try {
         await deleteEmployee(deletingEmployeeId);
-        await fetchAndSetEmployees(searchTerm);
+        await fetchAndSetEmployees(searchTerm, currentPage);
         setDeleteModalOpen(false);
         setDeletingEmployeeId(null);
       } catch (err: any) {
@@ -112,7 +130,11 @@ export const useEmployees = () => {
     isLoading,
     error,
     searchTerm,
-    setSearchTerm,
+    setSearchTerm: handleSearchTermChange,
+    currentPage,
+    setCurrentPage,
+    totalPages,
+    totalCount,
     isModalOpen,
     editingEmployee,
     handleSave,
