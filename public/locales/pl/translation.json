@@ -85,5 +85,18 @@
     "go_to_settings": "Przejdź do ustawień",
     "actions_group": "Akcje",
     "toggle_theme": "Przełącz motyw (Jasny/Ciemny)"
+  },
+  "errors": {
+    "validation": {
+      "isString": "Ten pole musi być tekstem",
+      "isNotEmpty": "To pole nie może być puste",
+      "minLength": "Tekst jest za krótki",
+      "maxLength": "Przekroczono limit znaków",
+      "invalidNameFormat": "Imię może zawierać tylko litery, spacje, myślniki i apostrofy",
+      "isEmail": "Format emaila jest nieprawidłowy",
+      "isEnum": "Proszę wybrać poprawny status",
+      "isDate": "Format daty jest nieprawidłowy",
+      "rateLimit": "Zbyt wiele żądań. Proszę spróbować ponownie później."
+    }
   }
 }

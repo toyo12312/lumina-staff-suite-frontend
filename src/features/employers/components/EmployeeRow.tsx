@@ -35,11 +35,15 @@ export const EmployeeRow: FC<EmployeeRowProps> = ({
 
   return (
     <tr className="bg-white dark:bg-gray-800 border-b dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-      <td className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+      <td className="px-6 py-4 font-medium text-gray-900 dark:text-white max-w-[150px] sm:max-w-[200px] truncate">
         {employee.firstName} {employee.lastName}
       </td>
-      <td className="px-6 py-4">{employee.position}</td>
-      <td className="px-6 py-4">{employee.email}</td>
+      <td className="px-6 py-4 max-w-[150px] sm:max-w-[200px] truncate">
+        {employee.position}
+      </td>
+      <td className="px-6 py-4 max-w-[150px] sm:max-w-[200px] truncate">
+        {employee.email}
+      </td>
       <td className="px-6 py-4">
         <StatusBadge status={employee.status} />
       </td>

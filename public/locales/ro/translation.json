@@ -86,5 +86,18 @@
     "go_to_settings": "Mergi la setări",
     "actions_group": "Acțiuni",
     "toggle_theme": "Schimbă tema (Luminată/Obscură)"
+  },
+  "errors": {
+    "validation": {
+      "isString": "Acest câmp trebuie să fie text",
+      "isNotEmpty": "Acest câmp nu poate fi gol",
+      "minLength": "Textul este prea scurt",
+      "maxLength": "Ai depășit limita de caractere",
+      "invalidNameFormat": "Numele poate conține doar litere, spații, cratime și apostrof",
+      "isEmail": "Formatul emailului este invalid",
+      "isEnum": "Vă rugăm să selectați un statut valid",
+      "isDate": "Formatul datei este invalid",
+      "rateLimit": "Prea multe cereri! Vă rugăm să așteptați un moment."
+    }
   }
 }

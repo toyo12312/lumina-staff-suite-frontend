@@ -85,5 +85,18 @@
     "go_to_settings": "Zu den Einstellungen gehen",
     "actions_group": "Aktionen",
     "toggle_theme": "Thema umschalten (Hell/Dunkel)"
+  },
+  "errors": {
+    "validation": {
+      "isString": "Dieses Feld muss ein String sein",
+      "isNotEmpty": "Dieses Feld darf nicht leer sein",
+      "minLength": "Text ist zu kurz",
+      "maxLength": "Sie haben das Zeichenlimit überschritten",
+      "invalidNameFormat": "Name kann nur Buchstaben, Leerzeichen, Bindestriche und Apostrophe enthalten",
+      "isEmail": "E-Mail-Format ist ungültig",
+      "isEnum": "Bitte wählen Sie einen gültigen Status",
+      "isDate": "Datumsformat ist ungültig",
+      "rateLimit": "Zu viele Anfragen. Bitte versuchen Sie es später erneut."
+    }
   }
 }

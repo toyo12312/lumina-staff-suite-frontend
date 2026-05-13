@@ -7,7 +7,7 @@ export type UpdateEmployeeDto = Partial<CreateEmployeeDto>;
 export const getEmployees = async (search = ''): Promise<Employee[]> => {
   const response = await fetch(`${API_BASE_URL}/employees?search=${search}`);
   if (!response.ok) {
-    throw new Error('Не вдалося завантажити список співробітників');
+    throw { status: response.status, message: 'errors.general.networkError' };
   }
   const result = await response.json();
 
@@ -22,12 +22,13 @@ export const createEmployee = async (
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(employeeData),
   });
+
   if (!response.ok) {
     const errorData = await response.json();
-    const message = Array.isArray(errorData.message)
-      ? errorData.message.join(', ')
-      : errorData.message;
-    throw new Error(message || 'Не вдалося створити співробітника');
+    throw {
+      status: response.status,
+      message: errorData.message || 'errors.general.networkError',
+    };
   }
   return response.json();
 };
@@ -41,12 +42,13 @@ export const updateEmployee = async (
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(employeeData),
   });
+
   if (!response.ok) {
     const errorData = await response.json();
-    const message = Array.isArray(errorData.message)
-      ? errorData.message.join(', ')
-      : errorData.message;
-    throw new Error(message || 'Не вдалося оновити дані співробітника');
+    throw {
+      status: response.status,
+      message: errorData.message || 'errors.general.networkError',
+    };
   }
   return response.json();
 };
@@ -55,8 +57,12 @@ export const deleteEmployee = async (id: number): Promise<void> => {
   const response = await fetch(`${API_BASE_URL}/employees/${id}`, {
     method: 'DELETE',
   });
+
   if (!response.ok) {
     const errorData = await response.json();
-    throw new Error(errorData.message || 'Не вдалося видалити співробітника');
+    throw {
+      status: response.status,
+      message: errorData.message || 'errors.general.networkError',
+    };
   }
 };

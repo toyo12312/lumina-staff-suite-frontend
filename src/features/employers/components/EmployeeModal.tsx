@@ -7,13 +7,14 @@ import {
 } from 'react';
 import { X } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
+import toast from 'react-hot-toast';
 import type { Employee, EmployeeStatus } from '../../../types';
 import type { UpdateEmployeeDto } from '../../../features/employers/useEmployers';
 
 interface EmployeeModalProps {
   employee: Partial<Employee> | null;
   onClose: () => void;
-  onSave: (employeeData: UpdateEmployeeDto) => void;
+  onSave: (employeeData: UpdateEmployeeDto) => Promise<void> | void;
 }
 
 const statusOptions: EmployeeStatus[] = ['active', 'on_leave', 'terminated'];
@@ -55,9 +56,25 @@ export const EmployeeModal: FC<EmployeeModalProps> = ({
     setFormData((prev) => ({ ...prev, [id]: value }));
   };
 
-  const handleSubmit = (e: FormEvent) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    onSave(formData);
+    try {
+      await onSave(formData);
+    } catch (error: any) {
+      if (error.status === 400 && error.message) {
+        if (Array.isArray(error.message)) {
+          error.message.forEach((key: string) => {
+            toast.error(t(key));
+          });
+        } else {
+          toast.error(t(error.message));
+        }
+      } else if (error.status === 429) {
+        toast.error(t('errors.validation.rateLimit'));
+      } else {
+        toast.error(t('errors.general.networkError'));
+      }
+    }
   };
 
   return (

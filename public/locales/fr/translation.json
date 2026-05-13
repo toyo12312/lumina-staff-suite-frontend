@@ -85,5 +85,18 @@
     "go_to_settings": "Aller aux paramètres",
     "actions_group": "Actions",
     "toggle_theme": "Changer de thème (Clair/Sombre)"
+  },
+  "errors": {
+    "validation": {
+      "isString": "Ce champ doit être un texte",
+      "isNotEmpty": "Ce champ ne peut pas être vide",
+      "minLength": "Le texte est trop court",
+      "maxLength": "Vous avez dépassé la limite de caractères",
+      "invalidNameFormat": "Le nom ne peut contenir que des lettres, des espaces, des tirets et des apostrophes",
+      "isEmail": "Le format de l'email est invalide",
+      "isEnum": "Veuillez sélectionner un statut valide",
+      "isDate": "Le format de la date est invalide",
+      "rateLimit": "Trop de requêtes. Veuillez réessayer plus tard."
+    }
   }
 }

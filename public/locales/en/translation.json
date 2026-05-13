@@ -85,5 +85,18 @@
     "go_to_settings": "Go to Settings",
     "actions_group": "Actions",
     "toggle_theme": "Toggle Theme (Light/Dark)"
+  },
+  "errors": {
+    "validation": {
+      "isString": "This field must be a string",
+      "isNotEmpty": "This field cannot be empty",
+      "minLength": "Text is too short",
+      "maxLength": "You have exceeded the character limit",
+      "invalidNameFormat": "Name can only contain letters, spaces, hyphens, and apostrophes",
+      "isEmail": "Email format is invalid",
+      "isEnum": "Please select a valid status",
+      "isDate": "Date format is invalid",
+      "rateLimit": "Too many requests. Please try again later."
+    }
   }
 }
