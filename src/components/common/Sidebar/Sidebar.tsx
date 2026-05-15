@@ -65,9 +65,6 @@ const Sidebar: FC<SidebarProps> = ({ isOpen, setOpen }) => {
       <Logo />
 
       <nav className="flex flex-col gap-2">
-        <p className="px-4 text-xs font-semibold text-slate-400 dark:text-gray-500 uppercase tracking-wider">
-          Staff Suite
-        </p>
         {navLinks.map((link) => (
           <NavLink
             key={link.to}
