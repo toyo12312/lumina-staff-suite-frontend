@@ -46,6 +46,7 @@ const PageLoader = () => (
 
 function App() {
   const [isSidebarOpen, setSidebarOpen] = useState(false);
+  const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
   const { toggleTheme } = useTheme();
   const [isCommandPaletteOpen, setCommandPaletteOpen] = useState(false);
 
@@ -63,14 +64,22 @@ function App() {
 
   return (
     <div className="min-h-screen bg-gray-100 dark:bg-gray-900 text-slate-800 dark:text-slate-200">
-      <Sidebar isOpen={isSidebarOpen} setOpen={setSidebarOpen} />
+      <Sidebar
+        isOpen={isSidebarOpen}
+        setOpen={setSidebarOpen}
+        isCollapsed={isSidebarCollapsed}
+        setIsCollapsed={setIsSidebarCollapsed}
+      />
 
       <CommandPalette
         isOpen={isCommandPaletteOpen}
         setOpen={setCommandPaletteOpen}
         toggleTheme={toggleTheme}
       />
-      <div className="relative md:ml-64 overflow-x-hidden">
+
+      <div
+        className={`relative transition-all duration-300 overflow-x-hidden ${isSidebarCollapsed ? 'md:ml-20' : 'md:ml-64'}`}
+      >
         <header className="p-4 md:hidden sticky top-0 bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm z-30 border-b border-slate-200 dark:border-gray-700">
           <button
             onClick={() => setSidebarOpen(true)}

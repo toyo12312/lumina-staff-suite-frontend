@@ -15,6 +15,8 @@ import { useTranslation } from 'react-i18next';
 interface SidebarProps {
   isOpen: boolean;
   setOpen: Dispatch<SetStateAction<boolean>>;
+  isCollapsed: boolean; // Обов'язково
+  setIsCollapsed: Dispatch<SetStateAction<boolean>>; // Обов'язково
 }
 
 const Sidebar: FC<SidebarProps> = ({ isOpen, setOpen }) => {
