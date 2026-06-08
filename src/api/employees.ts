@@ -38,9 +38,14 @@ export const createEmployee = async (
 
   if (!response.ok) {
     const errorData = await response.json();
+
+    const errorMessage = Array.isArray(errorData.message)
+      ? errorData.message[0]
+      : errorData.message;
+
     throw {
       status: response.status,
-      message: errorData.message || 'errors.general.networkError',
+      message: errorMessage || 'errors.general.networkError',
     };
   }
   return response.json();
@@ -58,9 +63,14 @@ export const updateEmployee = async (
 
   if (!response.ok) {
     const errorData = await response.json();
+
+    const errorMessage = Array.isArray(errorData.message)
+      ? errorData.message[0]
+      : errorData.message;
+
     throw {
       status: response.status,
-      message: errorData.message || 'errors.general.networkError',
+      message: errorMessage || 'errors.general.networkError',
     };
   }
   return response.json();
@@ -73,9 +83,14 @@ export const deleteEmployee = async (id: number): Promise<void> => {
 
   if (!response.ok) {
     const errorData = await response.json();
+
+    const errorMessage = Array.isArray(errorData.message)
+      ? errorData.message[0]
+      : errorData.message;
+
     throw {
       status: response.status,
-      message: errorData.message || 'errors.general.networkError',
+      message: errorMessage || 'errors.general.networkError',
     };
   }
 };
