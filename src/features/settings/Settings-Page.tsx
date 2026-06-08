@@ -1,6 +1,5 @@
 import { Helmet } from 'react-helmet-async';
 import { useTranslation } from 'react-i18next';
-
 import { useTheme } from './useTheme';
 import { ThemeToggle } from './components/ThemeToggle';
 import { LanguageSwitcher } from './components/LanguageSwitcher';
@@ -21,28 +20,37 @@ const SettingsPage = () => {
         </h1>
         <div className="max-w-2xl mx-auto">
           <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
-            <h2 className="text-lg font-semibold mb-4">
+            <h2 className="text-lg font-semibold mb-4 text-slate-800 dark:text-white">
               {t('settings.general')}
             </h2>
+
             <div className="flex items-center justify-between py-4 border-b dark:border-gray-700">
-              <div>
-                <p className="font-medium">{t('settings.theme_interface')}</p>
+              <div className="min-w-0 pr-4">
+                <p className="font-medium text-slate-800 dark:text-white">
+                  {t('settings.theme_interface')}
+                </p>
                 <p className="text-sm text-gray-500 dark:text-gray-400">
                   {t('settings.theme_description')}
                 </p>
               </div>
-              <ThemeToggle checked={theme === 'dark'} onChange={toggleTheme} />
+              <div className="flex-shrink-0">
+                <ThemeToggle
+                  checked={theme === 'dark'}
+                  onChange={toggleTheme}
+                />
+              </div>
             </div>
-            <div className="flex flex-col md:flex-row items-start md:items-center justify-between py-4">
-              <div className="mb-4 md:mb-0">
-                <p className="font-medium">
+
+            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between py-4 gap-4">
+              <div className="min-w-0">
+                <p className="font-medium text-slate-800 dark:text-white">
                   {t('settings.language_interface')}
                 </p>
                 <p className="text-sm text-gray-500 dark:text-gray-400">
                   {t('settings.language_description')}
                 </p>
               </div>
-              <div className="w-full md:w-48">
+              <div className="w-full sm:w-48 flex-shrink-0">
                 <LanguageSwitcher />
               </div>
             </div>

@@ -49,7 +49,10 @@ const Sidebar: FC<SidebarProps> = ({
     >
       <div className="flex justify-between items-center md:hidden mb-4 px-1">
         <span className="text-lg font-semibold dark:text-white">Меню</span>
-        <button onClick={() => setOpen(false)} className="p-2 dark:text-white">
+        <button
+          onClick={() => setOpen(false)}
+          className="p-2 dark:text-white flex-shrink-0"
+        >
           <X size={20} />
         </button>
       </div>
