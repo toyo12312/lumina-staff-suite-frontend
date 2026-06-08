@@ -70,7 +70,6 @@ function App() {
         isCollapsed={isSidebarCollapsed}
         setIsCollapsed={setIsSidebarCollapsed}
       />
-
       <CommandPalette
         isOpen={isCommandPaletteOpen}
         setOpen={setCommandPaletteOpen}
