@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import type { FC, Dispatch, SetStateAction } from 'react';
 import { NavLink, Link } from 'react-router-dom';
 import {
@@ -15,13 +14,17 @@ import { useTranslation } from 'react-i18next';
 interface SidebarProps {
   isOpen: boolean;
   setOpen: Dispatch<SetStateAction<boolean>>;
-  isCollapsed: boolean; // Обов'язково
-  setIsCollapsed: Dispatch<SetStateAction<boolean>>; // Обов'язково
+  isCollapsed: boolean;
+  setIsCollapsed: Dispatch<SetStateAction<boolean>>;
 }
 
-const Sidebar: FC<SidebarProps> = ({ isOpen, setOpen }) => {
+const Sidebar: FC<SidebarProps> = ({
+  isOpen,
+  setOpen,
+  isCollapsed,
+  setIsCollapsed,
+}) => {
   const { t } = useTranslation();
-  const [isCollapsed, setIsCollapsed] = useState(false);
 
   const navLinks = [
     { to: '/dashboard', icon: LayoutDashboard, text: t('sidebar.dashboard') },
