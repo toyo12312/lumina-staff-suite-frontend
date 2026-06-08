@@ -96,7 +96,8 @@
       "isEmail": "Le format de l'email est invalide",
       "isEnum": "Veuillez sélectionner un statut valide",
       "isDate": "Le format de la date est invalide",
-      "rateLimit": "Trop de requêtes. Veuillez réessayer plus tard."
+      "rateLimit": "Trop de requêtes. Veuillez réessayer plus tard.",
+      "elegantEmail": "Cette adresse e-mail semble avoir été créée par un bot avec un mauvais humeur 🤖. Veuillez utiliser une adresse e-mail appropriée."
     }
   }
 }

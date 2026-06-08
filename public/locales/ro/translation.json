@@ -97,7 +97,8 @@
       "isEmail": "Formatul emailului este invalid",
       "isEnum": "Vă rugăm să selectați un statut valid",
       "isDate": "Formatul datei este invalid",
-      "rateLimit": "Prea multe cereri! Vă rugăm să așteptați un moment."
+      "rateLimit": "Prea multe cereri! Vă rugăm să așteptați un moment.",
+      "elegantEmail": "Această adresă de email seamănă cu una creată de un bot cu umor rău 🤖. Vă rugăm să folosiți o adresă de email acceptabilă."
     }
   }
 }

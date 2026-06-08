@@ -96,7 +96,8 @@
       "isEmail": "E-Mail-Format ist ungültig",
       "isEnum": "Bitte wählen Sie einen gültigen Status",
       "isDate": "Datumsformat ist ungültig",
-      "rateLimit": "Zu viele Anfragen. Bitte versuchen Sie es später erneut."
+      "rateLimit": "Zu viele Anfragen. Bitte versuchen Sie es später erneut.",
+      "elegantEmail": "Diese E-Mail-Adresse sieht aus, als wäre sie von einem Bot mit schlechtem Humor erstellt worden 🤖. Bitte verwenden Sie eine angemessene E-Mail-Adresse."
     }
   }
 }

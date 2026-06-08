@@ -96,7 +96,8 @@
       "isEmail": "Email format is invalid",
       "isEnum": "Please select a valid status",
       "isDate": "Date format is invalid",
-      "rateLimit": "Too many requests. Please try again later."
+      "rateLimit": "Too many requests. Please try again later.",
+      "elegantEmail": "This email address looks like it was created by a bot with a bad humor 🤖. Please use a proper email address."
     }
   }
 }

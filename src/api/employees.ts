@@ -1,4 +1,5 @@
 import type { Employee } from '../types';
+
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 export type CreateEmployeeDto = Omit<Employee, 'id'>;
@@ -21,7 +22,15 @@ export const getEmployees = async (
   );
 
   if (!response.ok) {
-    throw { status: response.status, message: 'errors.general.networkError' };
+    const errorData = await response.json().catch(() => ({}));
+    const errorMessage = Array.isArray(errorData.message)
+      ? errorData.message[0]
+      : errorData.message;
+
+    throw {
+      status: response.status,
+      message: errorMessage || 'errors.general.networkError',
+    };
   }
 
   return response.json();
@@ -37,8 +46,7 @@ export const createEmployee = async (
   });
 
   if (!response.ok) {
-    const errorData = await response.json();
-
+    const errorData = await response.json().catch(() => ({}));
     const errorMessage = Array.isArray(errorData.message)
       ? errorData.message[0]
       : errorData.message;
@@ -62,8 +70,7 @@ export const updateEmployee = async (
   });
 
   if (!response.ok) {
-    const errorData = await response.json();
-
+    const errorData = await response.json().catch(() => ({}));
     const errorMessage = Array.isArray(errorData.message)
       ? errorData.message[0]
       : errorData.message;
@@ -82,8 +89,7 @@ export const deleteEmployee = async (id: number): Promise<void> => {
   });
 
   if (!response.ok) {
-    const errorData = await response.json();
-
+    const errorData = await response.json().catch(() => ({}));
     const errorMessage = Array.isArray(errorData.message)
       ? errorData.message[0]
       : errorData.message;

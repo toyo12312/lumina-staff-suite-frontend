@@ -96,7 +96,8 @@
       "isEmail": "Format emaila jest nieprawidłowy",
       "isEnum": "Proszę wybrać poprawny status",
       "isDate": "Format daty jest nieprawidłowy",
-      "rateLimit": "Zbyt wiele żądań. Proszę spróbować ponownie później."
+      "rateLimit": "Zbyt wiele żądań. Proszę spróbować ponownie później.",
+      "elegantEmail": "Ta adresa e-mail wygląda na stworzoną przez bota z złym humorem 🤖. Proszę użyć przyzwoitej adresy e-mail."
     }
   }
 }
