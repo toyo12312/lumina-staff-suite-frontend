@@ -25,7 +25,9 @@ export const EmployeeModal: FC<EmployeeModalProps> = ({
   onSave,
 }) => {
   const { t } = useTranslation();
-  const [formData, setFormData] = useState<UpdateEmployeeDto>({});
+  const [formData, setFormData] = useState<
+    UpdateEmployeeDto & { faxNumber?: string }
+  >({});
 
   const isEditing = !!employee?.id;
 

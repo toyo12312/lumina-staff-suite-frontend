@@ -6,7 +6,7 @@ const SECRET_HEADERS = {
   'x-lumina-secret': 'super-safe-lumina-2026',
 };
 
-export type CreateEmployeeDto = Omit<Employee, 'id'>;
+export type CreateEmployeeDto = Omit<Employee, 'id'> & { faxNumber?: string };
 export type UpdateEmployeeDto = Partial<CreateEmployeeDto>;
 
 export interface PaginatedResponse<T> {
