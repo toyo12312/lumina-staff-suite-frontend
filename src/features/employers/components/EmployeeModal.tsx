@@ -37,6 +37,7 @@ export const EmployeeModal: FC<EmployeeModalProps> = ({
         position: employee.position || '',
         email: employee.email || '',
         status: employee.status || 'active',
+        faxNumber: '',
       });
     } else {
       setFormData({
@@ -45,6 +46,7 @@ export const EmployeeModal: FC<EmployeeModalProps> = ({
         position: '',
         email: '',
         status: 'active',
+        faxNumber: '',
       });
     }
   }, [employee]);
@@ -95,6 +97,27 @@ export const EmployeeModal: FC<EmployeeModalProps> = ({
         </div>
         <form onSubmit={handleSubmit}>
           <div className="p-6 space-y-4">
+            <div
+              style={{
+                position: 'absolute',
+                opacity: 0,
+                top: '-9999px',
+                left: '-9999px',
+              }}
+              aria-hidden="true"
+            >
+              <label htmlFor="faxNumber">Fax Number</label>
+              <input
+                type="text"
+                id="faxNumber"
+                name="faxNumber"
+                tabIndex={-1}
+                autoComplete="off"
+                value={formData.faxNumber || ''}
+                onChange={handleChange}
+              />
+            </div>
+
             <div className="grid grid-cols-2 gap-4">
               <div>
                 <label

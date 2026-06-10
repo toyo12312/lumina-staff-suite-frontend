@@ -2,6 +2,10 @@ import type { Employee } from '../types';
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
+const SECRET_HEADERS = {
+  'x-lumina-secret': 'super-safe-lumina-2026',
+};
+
 export type CreateEmployeeDto = Omit<Employee, 'id'>;
 export type UpdateEmployeeDto = Partial<CreateEmployeeDto>;
 
@@ -19,6 +23,11 @@ export const getEmployees = async (
 ): Promise<PaginatedResponse<Employee>> => {
   const response = await fetch(
     `${API_BASE_URL}/employees?search=${search}&page=${page}&limit=${limit}`,
+    {
+      headers: {
+        ...SECRET_HEADERS,
+      },
+    },
   );
 
   if (!response.ok) {
@@ -41,7 +50,10 @@ export const createEmployee = async (
 ): Promise<Employee> => {
   const response = await fetch(`${API_BASE_URL}/employees`, {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
+    headers: {
+      'Content-Type': 'application/json',
+      ...SECRET_HEADERS,
+    },
     body: JSON.stringify(employeeData),
   });
 
@@ -65,7 +77,10 @@ export const updateEmployee = async (
 ): Promise<Employee> => {
   const response = await fetch(`${API_BASE_URL}/employees/${id}`, {
     method: 'PATCH',
-    headers: { 'Content-Type': 'application/json' },
+    headers: {
+      'Content-Type': 'application/json',
+      ...SECRET_HEADERS,
+    },
     body: JSON.stringify(employeeData),
   });
 
@@ -86,6 +101,9 @@ export const updateEmployee = async (
 export const deleteEmployee = async (id: number): Promise<void> => {
   const response = await fetch(`${API_BASE_URL}/employees/${id}`, {
     method: 'DELETE',
+    headers: {
+      ...SECRET_HEADERS,
+    },
   });
 
   if (!response.ok) {
