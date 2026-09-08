@@ -8,13 +8,16 @@ import {
 import { X } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import toast from 'react-hot-toast';
+import { useGoogleReCaptcha } from 'react-google-recaptcha-v3';
 import type { Employee, EmployeeStatus } from '../../../types';
 import type { UpdateEmployeeDto } from '../../../features/employers/useEmployers';
 
 interface EmployeeModalProps {
   employee: Partial<Employee> | null;
   onClose: () => void;
-  onSave: (employeeData: UpdateEmployeeDto) => Promise<void> | void;
+  onSave: (
+    employeeData: UpdateEmployeeDto & { recaptchaToken?: string },
+  ) => Promise<void> | void;
 }
 
 const statusOptions: EmployeeStatus[] = ['active', 'on_leave', 'terminated'];
@@ -25,9 +28,11 @@ export const EmployeeModal: FC<EmployeeModalProps> = ({
   onSave,
 }) => {
   const { t } = useTranslation();
+  const { executeRecaptcha } = useGoogleReCaptcha();
   const [formData, setFormData] = useState<
-    UpdateEmployeeDto & { faxNumber?: string }
+    UpdateEmployeeDto & { faxNumber?: string; recaptchaToken?: string }
   >({});
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const isEditing = !!employee?.id;
 
@@ -62,8 +67,16 @@ export const EmployeeModal: FC<EmployeeModalProps> = ({
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
+    if (!executeRecaptcha) {
+      toast.error(t('errors.validation.recaptchaNotLoaded'));
+      return;
+    }
+
+    setIsSubmitting(true);
     try {
-      await onSave(formData);
+      const recaptchaToken = await executeRecaptcha('submit_employee_form');
+      await onSave({ ...formData, recaptchaToken });
+      onClose();
     } catch (error: any) {
       if (error.status === 400 && error.message) {
         if (Array.isArray(error.message)) {
@@ -78,6 +91,8 @@ export const EmployeeModal: FC<EmployeeModalProps> = ({
       } else {
         toast.error(t('errors.general.networkError'));
       }
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -92,6 +107,7 @@ export const EmployeeModal: FC<EmployeeModalProps> = ({
           </h3>
           <button
             onClick={onClose}
+            type="button"
             className="text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-600 rounded-lg p-1.5"
           >
             <X size={20} />
@@ -210,7 +226,8 @@ export const EmployeeModal: FC<EmployeeModalProps> = ({
           <div className="flex items-center p-4 border-t dark:border-gray-700 rounded-b-lg">
             <button
               type="submit"
-              className="text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-500 dark:hover:bg-blue-600 dark:focus:ring-blue-800"
+              disabled={isSubmitting}
+              className="text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-500 dark:hover:bg-blue-600 dark:focus:ring-blue-800 disabled:opacity-50"
             >
               {isEditing
                 ? t('employees.button_update')
@@ -219,6 +236,7 @@ export const EmployeeModal: FC<EmployeeModalProps> = ({
             <button
               type="button"
               onClick={onClose}
+              disabled={isSubmitting}
               className="ml-3 text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600"
             >
               {t('employees.button_cancel')}

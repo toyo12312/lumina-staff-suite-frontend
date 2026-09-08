@@ -1,5 +1,6 @@
 import React, { useState, useEffect, Suspense } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
+import { GoogleReCaptchaProvider } from 'react-google-recaptcha-v3';
 
 import Sidebar from './components/common/Sidebar/Sidebar';
 import { CommandPalette } from './components/common/Command-Palette/Command-Palette';
@@ -63,67 +64,74 @@ function App() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-gray-100 dark:bg-gray-900 text-slate-800 dark:text-slate-200">
-      <Sidebar
-        isOpen={isSidebarOpen}
-        setOpen={setSidebarOpen}
-        isCollapsed={isSidebarCollapsed}
-        setIsCollapsed={setIsSidebarCollapsed}
-      />
-      <CommandPalette
-        isOpen={isCommandPaletteOpen}
-        setOpen={setCommandPaletteOpen}
-        toggleTheme={toggleTheme}
-      />
+    <GoogleReCaptchaProvider
+      reCaptchaKey={import.meta.env.VITE_RECAPTCHA_SITE_KEY || ''}
+    >
+      <div className="min-h-screen bg-gray-100 dark:bg-gray-900 text-slate-800 dark:text-slate-200">
+        <Sidebar
+          isOpen={isSidebarOpen}
+          setOpen={setSidebarOpen}
+          isCollapsed={isSidebarCollapsed}
+          setIsCollapsed={setIsSidebarCollapsed}
+        />
+        <CommandPalette
+          isOpen={isCommandPaletteOpen}
+          setOpen={setCommandPaletteOpen}
+          toggleTheme={toggleTheme}
+        />
 
-      <div
-        className={`relative transition-all duration-300 overflow-x-hidden ${isSidebarCollapsed ? 'md:ml-20' : 'md:ml-64'}`}
-      >
-        <header className="p-4 md:hidden sticky top-0 bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm z-30 border-b border-slate-200 dark:border-gray-700">
-          <button
-            onClick={() => setSidebarOpen(true)}
-            className="p-2 rounded-md text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-gray-700"
-            aria-label="Open sidebar"
-          >
-            <svg
-              className="w-6 h-6"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M4 6h16M4 12h16M4 18h16"
-              ></path>
-            </svg>
-          </button>
-        </header>
-
-        <main>
-          <Suspense fallback={<PageLoader />}>
-            <Routes>
-              <Route path="/dashboard" element={<DashboardPage />} />
-              <Route path="/employees" element={<EmployeesPage />} />
-              <Route path="/reports" element={<ReportsPage />} />
-              <Route path="/settings" element={<SettingsPage />} />
-              <Route path="/" element={<Navigate to="/dashboard" replace />} />
-              <Route path="*" element={<NotFoundPage />} />
-            </Routes>
-          </Suspense>
-        </main>
-      </div>
-
-      {isSidebarOpen && (
         <div
-          onClick={() => setSidebarOpen(false)}
-          className="fixed inset-0 bg-black/50 z-30 md:hidden"
-          aria-hidden="true"
-        ></div>
-      )}
-    </div>
+          className={`relative transition-all duration-300 overflow-x-hidden ${isSidebarCollapsed ? 'md:ml-20' : 'md:ml-64'}`}
+        >
+          <header className="p-4 md:hidden sticky top-0 bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm z-30 border-b border-slate-200 dark:border-gray-700">
+            <button
+              onClick={() => setSidebarOpen(true)}
+              className="p-2 rounded-md text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-gray-700"
+              aria-label="Open sidebar"
+            >
+              <svg
+                className="w-6 h-6"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M4 6h16M4 12h16M4 18h16"
+                ></path>
+              </svg>
+            </button>
+          </header>
+
+          <main>
+            <Suspense fallback={<PageLoader />}>
+              <Routes>
+                <Route path="/dashboard" element={<DashboardPage />} />
+                <Route path="/employees" element={<EmployeesPage />} />
+                <Route path="/reports" element={<ReportsPage />} />
+                <Route path="/settings" element={<SettingsPage />} />
+                <Route
+                  path="/"
+                  element={<Navigate to="/dashboard" replace />}
+                />
+                <Route path="*" element={<NotFoundPage />} />
+              </Routes>
+            </Suspense>
+          </main>
+        </div>
+
+        {isSidebarOpen && (
+          <div
+            onClick={() => setSidebarOpen(false)}
+            className="fixed inset-0 bg-black/50 z-30 md:hidden"
+            aria-hidden="true"
+          ></div>
+        )}
+      </div>
+    </GoogleReCaptchaProvider>
   );
 }
 
