@@ -144,7 +144,7 @@ export const EmployeeForm: FC<EmployeeFormProps> = ({
               </span>
               <input
                 type="number"
-                placeholder="Відповідь"
+                placeholder="Ответ"
                 value={captchaAnswer}
                 onChange={(e) => setCaptchaAnswer(e.target.value)}
                 className="w-32 p-2 bg-white dark:bg-slate-800 border border-gray-300 dark:border-slate-600 rounded-md text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
