@@ -35,6 +35,8 @@
     "table_header_status": "Status",
     "table_header_email": "Email",
     "table_header_actions": "Actions",
+    "antibot": "Anti-Bot protection",
+    "captcha_placeholder": "Enter answer",
     "status": {
       "active": "Active",
       "on_leave": "On Leave",

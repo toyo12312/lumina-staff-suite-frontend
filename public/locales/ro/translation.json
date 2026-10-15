@@ -35,6 +35,8 @@
     "table_header_status": "Statut",
     "table_header_email": "Email",
     "table_header_actions": "Acțiuni",
+    "antibot": "Protecție anti-bot",
+    "captcha_placeholder": "Introduceți răspunsul",
     "status": {
       "active": "Activ",
       "on_leave": "În concediu",

@@ -35,6 +35,8 @@
     "table_header_status": "Статус",
     "table_header_email": "Email",
     "table_header_actions": "Дії",
+    "antibot": "Захист від ботів",
+    "captcha_placeholder": "Введіть відповідь",
     "status": {
       "active": "Активний",
       "on_leave": "У відпустці",
