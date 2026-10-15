@@ -6,9 +6,9 @@ import {
   type FormEvent,
 } from 'react';
 import { useTranslation } from 'react-i18next';
-
 import type { Employee } from '../../types';
 import type { UpdateEmployeeDto } from '../../features/employers/useEmployers';
+import { getCaptcha } from '../../api/employees';
 
 const Spinner = () => (
   <svg
@@ -47,8 +47,10 @@ export const EmployeeForm: FC<EmployeeFormProps> = ({
   isSubmitting,
 }) => {
   const { t } = useTranslation();
-
   const [formData, setFormData] = useState<UpdateEmployeeDto>({});
+  const [captchaQuestion, setCaptchaQuestion] = useState<string>('');
+  const [captchaToken, setCaptchaToken] = useState<string>('');
+  const [captchaAnswer, setCaptchaAnswer] = useState<string>('');
 
   const isEditing = !!employee;
 
@@ -59,9 +61,20 @@ export const EmployeeForm: FC<EmployeeFormProps> = ({
         lastName: employee.lastName || '',
         email: employee.email || '',
         position: employee.position || '',
+        status: employee.status,
+        hireDate: employee.hireDate,
       });
     }
-  }, [employee]);
+
+    if (!isEditing) {
+      getCaptcha()
+        .then((data) => {
+          setCaptchaToken(data.token);
+          setCaptchaQuestion(data.question);
+        })
+        .catch(() => {});
+    }
+  }, [employee, isEditing]);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -69,7 +82,11 @@ export const EmployeeForm: FC<EmployeeFormProps> = ({
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
-    onSave(formData);
+    onSave({
+      ...formData,
+      captchaToken,
+      captchaAnswer: captchaAnswer ? Number(captchaAnswer) : undefined,
+    });
   };
 
   const inputClasses =
@@ -83,7 +100,6 @@ export const EmployeeForm: FC<EmployeeFormProps> = ({
           : t('employees.add_form_title')}
       </h2>
       <form onSubmit={handleSubmit}>
-        {}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
           <input
             type="text"
@@ -121,6 +137,21 @@ export const EmployeeForm: FC<EmployeeFormProps> = ({
             className={`${inputClasses} md:col-span-2`}
             required
           />
+          {!isEditing && captchaQuestion && (
+            <div className="md:col-span-2 flex items-center gap-4 bg-gray-100 dark:bg-slate-900 p-3 rounded-lg border border-gray-300 dark:border-slate-700">
+              <span className="text-sm font-semibold text-gray-700 dark:text-gray-300">
+                Anti-Bot: {captchaQuestion}
+              </span>
+              <input
+                type="number"
+                placeholder="Відповідь"
+                value={captchaAnswer}
+                onChange={(e) => setCaptchaAnswer(e.target.value)}
+                className="w-32 p-2 bg-white dark:bg-slate-800 border border-gray-300 dark:border-slate-600 rounded-md text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                required
+              />
+            </div>
+          )}
         </div>
         <div className="flex justify-end space-x-3">
           <button

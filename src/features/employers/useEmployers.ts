@@ -1,6 +1,10 @@
 import { useState, useEffect, useCallback } from 'react';
 
-import type { Employee } from '../../types';
+import type {
+  Employee,
+  CreateEmployeeDto,
+  UpdateEmployeeDto,
+} from '../../types';
 import {
   getEmployees,
   createEmployee,
@@ -8,8 +12,7 @@ import {
   deleteEmployee,
 } from '../../api/employees';
 
-export type CreateEmployeeDto = Omit<Employee, 'id'>;
-export type UpdateEmployeeDto = Partial<CreateEmployeeDto>;
+export type { CreateEmployeeDto, UpdateEmployeeDto };
 
 export const useEmployees = () => {
   const [employees, setEmployees] = useState<Employee[]>([]);
@@ -76,7 +79,11 @@ export const useEmployees = () => {
           email: employeeData.email || '',
           position: employeeData.position || '',
           status: employeeData.status || 'active',
-          hireDate: new Date().toISOString(),
+          hireDate:
+            employeeData.hireDate || new Date().toISOString().split('T')[0],
+          faxNumber: employeeData.faxNumber,
+          captchaToken: employeeData.captchaToken,
+          captchaAnswer: employeeData.captchaAnswer,
         };
         await createEmployee(newEmployeeData);
         setCurrentPage(1);

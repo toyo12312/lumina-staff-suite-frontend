@@ -1,4 +1,4 @@
-import type { Employee } from '../types';
+import type { Employee, CreateEmployeeDto, UpdateEmployeeDto } from '../types';
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
@@ -6,8 +6,7 @@ const SECRET_HEADERS = {
   'x-lumina-secret': 'super-safe-lumina-2026',
 };
 
-export type CreateEmployeeDto = Omit<Employee, 'id'> & { faxNumber?: string };
-export type UpdateEmployeeDto = Partial<CreateEmployeeDto>;
+export type { CreateEmployeeDto, UpdateEmployeeDto };
 
 export interface PaginatedResponse<T> {
   data: T[];
@@ -15,6 +14,25 @@ export interface PaginatedResponse<T> {
   page: number;
   lastPage: number;
 }
+
+export interface CaptchaResponse {
+  token: string;
+  question: string;
+}
+
+export const getCaptcha = async (): Promise<CaptchaResponse> => {
+  const response = await fetch(`${API_BASE_URL}/employees/captcha`, {
+    headers: {
+      ...SECRET_HEADERS,
+    },
+  });
+
+  if (!response.ok) {
+    throw new Error('Failed to load captcha');
+  }
+
+  return response.json();
+};
 
 export const getEmployees = async (
   search = '',

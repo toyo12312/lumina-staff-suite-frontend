@@ -1,6 +1,13 @@
-import { useState, type FC, type ChangeEvent, type FormEvent } from 'react';
+import {
+  useState,
+  useEffect,
+  type FC,
+  type ChangeEvent,
+  type FormEvent,
+} from 'react';
 import { useTranslation } from 'react-i18next';
 import type { UpdateEmployeeDto } from '../../features/employers/useEmployers';
+import { getCaptcha } from '../../api/employees';
 
 interface EmployeesAddFormProps {
   onSave: (employee: UpdateEmployeeDto) => void;
@@ -11,11 +18,25 @@ const initialState: UpdateEmployeeDto = {
   lastName: '',
   email: '',
   position: '',
+  status: 'active' as any,
+  hireDate: new Date().toISOString().split('T')[0],
 };
 
 const EmployeesAddForm: FC<EmployeesAddFormProps> = ({ onSave }) => {
   const { t } = useTranslation();
   const [formData, setFormData] = useState(initialState);
+  const [captchaQuestion, setCaptchaQuestion] = useState<string>('');
+  const [captchaToken, setCaptchaToken] = useState<string>('');
+  const [captchaAnswer, setCaptchaAnswer] = useState<string>('');
+
+  useEffect(() => {
+    getCaptcha()
+      .then((data) => {
+        setCaptchaToken(data.token);
+        setCaptchaQuestion(data.question);
+      })
+      .catch(() => {});
+  }, []);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -24,8 +45,13 @@ const EmployeesAddForm: FC<EmployeesAddFormProps> = ({ onSave }) => {
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    onSave(formData);
+    onSave({
+      ...formData,
+      captchaToken,
+      captchaAnswer: captchaAnswer ? Number(captchaAnswer) : undefined,
+    });
     setFormData(initialState);
+    setCaptchaAnswer('');
   };
 
   return (
@@ -109,6 +135,21 @@ const EmployeesAddForm: FC<EmployeesAddFormProps> = ({ onSave }) => {
             required
           />
         </div>
+        {captchaQuestion && (
+          <div className="md:col-span-2 flex items-center gap-4 bg-gray-50 dark:bg-gray-700/50 p-3 rounded-md border border-gray-300 dark:border-gray-600">
+            <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
+              Anti-Bot: {captchaQuestion}
+            </span>
+            <input
+              type="number"
+              placeholder="Відповідь"
+              value={captchaAnswer}
+              onChange={(e) => setCaptchaAnswer(e.target.value)}
+              className="w-32 p-2 rounded-md bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white focus:ring-blue-500 focus:border-blue-500"
+              required
+            />
+          </div>
+        )}
       </div>
       <button
         type="submit"
