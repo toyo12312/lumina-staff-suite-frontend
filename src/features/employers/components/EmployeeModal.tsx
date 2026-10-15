@@ -8,15 +8,19 @@ import {
 import { X } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import toast from 'react-hot-toast';
-import { useGoogleReCaptcha } from 'react-google-recaptcha-v3';
 import type { Employee, EmployeeStatus } from '../../../types';
 import type { UpdateEmployeeDto } from '../../../features/employers/useEmployers';
+import { getCaptcha } from '../../../api/employees';
 
 interface EmployeeModalProps {
   employee: Partial<Employee> | null;
   onClose: () => void;
   onSave: (
-    employeeData: UpdateEmployeeDto & { recaptchaToken?: string },
+    employeeData: UpdateEmployeeDto & {
+      faxNumber?: string;
+      captchaToken?: string;
+      captchaAnswer?: number;
+    },
   ) => Promise<void> | void;
 }
 
@@ -28,11 +32,17 @@ export const EmployeeModal: FC<EmployeeModalProps> = ({
   onSave,
 }) => {
   const { t } = useTranslation();
-  const { executeRecaptcha } = useGoogleReCaptcha();
   const [formData, setFormData] = useState<
-    UpdateEmployeeDto & { faxNumber?: string; recaptchaToken?: string }
+    UpdateEmployeeDto & {
+      faxNumber?: string;
+      captchaToken?: string;
+      captchaAnswer?: number;
+    }
   >({});
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [captchaQuestion, setCaptchaQuestion] = useState<string>('');
+  const [captchaToken, setCaptchaToken] = useState<string>('');
+  const [captchaAnswer, setCaptchaAnswer] = useState<string>('');
 
   const isEditing = !!employee?.id;
 
@@ -55,6 +65,12 @@ export const EmployeeModal: FC<EmployeeModalProps> = ({
         status: 'active',
         faxNumber: '',
       });
+      getCaptcha()
+        .then((data) => {
+          setCaptchaToken(data.token);
+          setCaptchaQuestion(data.question);
+        })
+        .catch(() => {});
     }
   }, [employee]);
 
@@ -67,15 +83,14 @@ export const EmployeeModal: FC<EmployeeModalProps> = ({
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    if (!executeRecaptcha) {
-      toast.error(t('errors.validation.recaptchaNotLoaded'));
-      return;
-    }
-
     setIsSubmitting(true);
     try {
-      const recaptchaToken = await executeRecaptcha('submit_employee_form');
-      await onSave({ ...formData, recaptchaToken });
+      await onSave({
+        ...formData,
+        captchaToken: isEditing ? undefined : captchaToken,
+        captchaAnswer:
+          isEditing || !captchaAnswer ? undefined : Number(captchaAnswer),
+      });
       onClose();
     } catch (error: any) {
       if (error.status === 400 && error.message) {
@@ -222,6 +237,21 @@ export const EmployeeModal: FC<EmployeeModalProps> = ({
                 ))}
               </select>
             </div>
+            {!isEditing && captchaQuestion && (
+              <div>
+                <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                  Anti-Bot: {captchaQuestion}
+                </label>
+                <input
+                  type="number"
+                  placeholder="Відповідь"
+                  value={captchaAnswer}
+                  onChange={(e) => setCaptchaAnswer(e.target.value)}
+                  className="w-full p-2.5 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
+                  required
+                />
+              </div>
+            )}
           </div>
           <div className="flex items-center p-4 border-t dark:border-gray-700 rounded-b-lg">
             <button
