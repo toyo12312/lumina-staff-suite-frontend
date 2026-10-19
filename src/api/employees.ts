@@ -3,7 +3,7 @@ import type { Employee, CreateEmployeeDto, UpdateEmployeeDto } from '../types';
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 const SECRET_HEADERS = {
-  'x-lumina-secret': 'super-safe-lumina-2026',
+  'x-lumina-client-secret': import.meta.env.VITE_FRONTEND_CLIENT_SECRET,
 };
 
 export type { CreateEmployeeDto, UpdateEmployeeDto };
